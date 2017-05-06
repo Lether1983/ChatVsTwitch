@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+
 using NUnit.Framework;
 
 public class MapGenerationTests
@@ -21,7 +22,7 @@ public class MapGenerationTests
         }
     }
 
-    [Test, ExpectedException(typeof(AssertionException))]
+    [Test]
     public void EditorFailingTest()
     {
         Map map = new Map();

@@ -4,6 +4,10 @@ using System;
 
 public class TrapGenerator : IMapGenerator
 {
+    int Mapwidth;
+    int Mapheight;
+    int[,] RandomMap;
+
     public int[,] Generate()
     {
         return null;
@@ -11,18 +15,10 @@ public class TrapGenerator : IMapGenerator
 
     public void Setup(int width, int height, int[,] Randommap)
     {
-    }
-
-
-
-    // Use this for initialization
-    void Start()
-    {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnTrapsOnMap()
     {
 
     }
