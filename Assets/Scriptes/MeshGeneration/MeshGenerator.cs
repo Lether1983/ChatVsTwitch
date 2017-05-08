@@ -44,17 +44,21 @@ public class MeshGenerator : MonoBehaviour
                 triangle[tIndex + 5] = vIndex + 0;
 
                 /*
-                 * 0 = Ground
-                 * 1 = Wall 
-                 * 2 = Room
-                 * 3 = Way
-                 * 4 = Door
-                 * 5 = EnemyGuy
-                 * 6 = Mine
-                 * 7 = Target
+                 *  0 = Ground
+                 *  1 = Wall 
+                 *  2 = Room
+                 *  3 = Way
+                 *  4 = Door
+                 *  5 = EnemyGuy
+                 *  6 = Mine
+                 *  7 = Target
+                 *  8 = Bush
+                 *  9 = Tree
+                 * 10 = Stone
+                 * 11 = Trap
                  */
 
-                string[] tiles = new[] { "erde2", "blacktile", "beton_indoor", "pflaster", "wall", "kacheln", "beton_outdoor", "gras" };
+                string[] tiles = new[] { "erde2", "blacktile", "beton_indoor", "pflaster", "wall", "kacheln", "beton_outdoor", "gras", "asphalt", "erde" };
                 var uv = tManager.getUV(tiles[tile]);
 
                 uvs[vIndex + 0] = uv[0];

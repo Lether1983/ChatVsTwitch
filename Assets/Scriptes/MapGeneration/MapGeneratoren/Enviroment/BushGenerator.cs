@@ -7,6 +7,7 @@ public class BushGenerator : IMapGenerator
 {
     int Mapwidth;
     int Mapheight;
+    int count;
     int[,] RandomMap;
 
     public int[,] Generate()
@@ -20,21 +21,22 @@ public class BushGenerator : IMapGenerator
         Mapwidth = width;
         Mapheight = height;
         RandomMap = Randommap;
+        count = Mapwidth * Mapheight / 8;
     }
 
     private void SpawnBushesOnMap()
     {
-
-        int tempX = UnityEngine.Random.Range(0, Mapwidth);
-        int tempY = UnityEngine.Random.Range(0, Mapheight);
-        for (int x = 0; x < Mapwidth; x++)
+        for (int x = 0; x < count; x++)
         {
-            if (tempX < 50 || tempX > 70)
+            int tempX = UnityEngine.Random.Range(0, Mapwidth);
+            int tempY = UnityEngine.Random.Range(0, Mapheight);
+            if (RandomMap[tempX, tempY] != 0)
             {
-                if (RandomMap[tempX, tempY] != 0)
-                {
-                       
-                }
+                x--;
+            }
+            else
+            {
+                RandomMap[tempX, tempY] = 8;
             }
         }
     }
