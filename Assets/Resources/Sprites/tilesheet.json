@@ -82,8 +82,17 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "Wall",
+	"filename": "Stone",
 	"frame": {"x":64,"y":128,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Wall",
+	"frame": {"x":128,"y":128,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -97,6 +106,6 @@
 	"format": "RGBA8888",
 	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c951515d1f90be28f16ef37944fb6d41:af3f2027fab76306bc9cbab6cba64bbe:e3b0529b9d759bc29b1a04ada238b1dd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:86d2069d3c1f1a2de521255bf8884bd9:63fdb1bb8780f0f206406d2f1a286244:e3b0529b9d759bc29b1a04ada238b1dd$"
 }
 }

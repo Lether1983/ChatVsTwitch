@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour , IGameManager
         levelMap.AddDecorater(new DungeonGenerator());
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
+        levelMap.AddDecorater(new StoneGenerator());
         levelMap.CreateNewMap();
         meshGenerator.CreateMesh(levelMap);
     }

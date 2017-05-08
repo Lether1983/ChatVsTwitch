@@ -38,7 +38,7 @@ public class StoneGenerator : IMapGenerator
             }
             else
             {
-                RandomMap[tempX, tempY] = 9;
+                RandomMap[tempX, tempY] = 10;
             }
         }
     }

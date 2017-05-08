@@ -58,7 +58,7 @@ public class MeshGenerator : MonoBehaviour
                  * 11 = Trap
                  */
 
-                string[] tiles = new[] { "erde2", "blacktile", "beton_indoor", "pflaster", "wall", "kacheln", "beton_outdoor", "gras", "asphalt", "erde" };
+                string[] tiles = new[] { "erde2", "blacktile", "beton_indoor", "pflaster", "wall", "kacheln", "beton_outdoor", "gras", "asphalt", "erde","stone" };
                 var uv = tManager.getUV(tiles[tile]);
 
                 uvs[vIndex + 0] = uv[0];
