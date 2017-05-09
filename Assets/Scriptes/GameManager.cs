@@ -75,6 +75,48 @@ public class GameManager : MonoBehaviour , IGameManager
         var item = deciderDict[list[2]];
                 Debug.Log(item);
 
+        if(deciderDict[list[2]] == activeVote.Answer1)
+        {
+            if(activeVote.Answer1 == "yes")
+            {
+
+            }
+            else if(activeVote.Answer1 == "more")
+            {
+
+            }
+            else if(activeVote.Answer1 == "heavy")
+            {
+
+            }
+        }
+        else if(deciderDict[list[2]] == activeVote.Answer2)
+        {
+            if(activeVote.Answer1 == "more")
+            {
+
+            }
+            else if (activeVote.Answer1 == "equal")
+            {
+
+            }
+            else if(activeVote.Answer1 == "no")
+            {
+
+            }
+        }
+        else if(deciderDict[list[2]] == activeVote.Answer2)
+        {
+            if(activeVote.Answer1 == "more")
+            {
+
+            }
+            else if(activeVote.Answer1 == "more")
+            {
+
+            }
+        }
+
         activeVote.Answercount1 = 0;
         activeVote.Answercount2 = 0;
         activeVote.Answercount3 = 0;
