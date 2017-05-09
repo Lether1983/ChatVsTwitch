@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.4.0</string>
         <key>fileName</key>
-        <string>G:/BA Project/MissionAgainstChat/Texturepacker/tilesheet.tps</string>
+        <string>D:/Projekte/MiniGameTwitchChat/Source/MissionAgainstChat/Texturepacker/tilesheet.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -200,7 +200,9 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">BlackTile.png</key>
+            <key type="filename">Rock_Placeholder.png</key>
             <key type="filename">Stone.png</key>
+            <key type="filename">Trap_Placeholder.png</key>
             <key type="filename">Wall.png</key>
             <key type="filename">asphalt.png</key>
             <key type="filename">beton_indoor.png</key>
@@ -236,6 +238,8 @@
             <filename>pflaster.png</filename>
             <filename>Wall.png</filename>
             <filename>Stone.png</filename>
+            <filename>Rock_Placeholder.png</filename>
+            <filename>Trap_Placeholder.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

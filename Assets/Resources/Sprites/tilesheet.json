@@ -82,7 +82,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "Stone",
+	"filename": "Rock_Placeholder",
 	"frame": {"x":64,"y":128,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -91,8 +91,26 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "Wall",
+	"filename": "Stone",
 	"frame": {"x":128,"y":128,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Trap_Placeholder",
+	"frame": {"x":192,"y":128,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Wall",
+	"frame": {"x":0,"y":192,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -106,6 +124,6 @@
 	"format": "RGBA8888",
 	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:86d2069d3c1f1a2de521255bf8884bd9:63fdb1bb8780f0f206406d2f1a286244:e3b0529b9d759bc29b1a04ada238b1dd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:da6f6c8297e5348b405e6ebb2aa4550a:f3a7aed5998166d26c94cafb75398bcb:e3b0529b9d759bc29b1a04ada238b1dd$"
 }
 }
