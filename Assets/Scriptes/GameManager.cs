@@ -75,46 +75,17 @@ public class GameManager : MonoBehaviour , IGameManager
         var item = deciderDict[list[2]];
                 Debug.Log(item);
 
-        if(deciderDict[list[2]] == activeVote.Answer1)
+        if(activeVote.GetType() == typeof(CharakterVoteObject))
         {
-            if(activeVote.Answer1 == "yes")
-            {
 
-            }
-            else if(activeVote.Answer1 == "more")
-            {
-
-            }
-            else if(activeVote.Answer1 == "heavy")
-            {
-
-            }
         }
-        else if(deciderDict[list[2]] == activeVote.Answer2)
+        else if (activeVote.GetType() == typeof(EnviromentVoteObject))
         {
-            if(activeVote.Answer1 == "more")
-            {
 
-            }
-            else if (activeVote.Answer1 == "equal")
-            {
-
-            }
-            else if(activeVote.Answer1 == "no")
-            {
-
-            }
         }
-        else if(deciderDict[list[2]] == activeVote.Answer2)
+        else if (activeVote.GetType() == typeof(BiomVoteObject))
         {
-            if(activeVote.Answer1 == "more")
-            {
 
-            }
-            else if(activeVote.Answer1 == "more")
-            {
-
-            }
         }
 
         activeVote.Answercount1 = 0;
