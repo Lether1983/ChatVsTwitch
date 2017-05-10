@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CharakterVoteObject : VoteObject
 {
-
+    //TODO: ADD Logic here for CharakterVoteObject
 }

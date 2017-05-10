@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class EnviromentVoteObject : VoteObject
 {
-    int AnswerValue1 = 0;
-    int AnswerValue2 = 0;
-    int Answervalue3 = 0;
+    //TODO: Add Logic here for EnivormentVoteObject
 }

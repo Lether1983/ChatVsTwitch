@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour , IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
-        levelMap.AddDecorater(new TrapGenerator());
         levelMap.CreateNewMap();
         meshGenerator.CreateMesh(levelMap);
     }
@@ -74,18 +73,51 @@ public class GameManager : MonoBehaviour , IGameManager
         Debug.Log(list[2]);
         var item = deciderDict[list[2]];
                 Debug.Log(item);
-
+        //TODO: Add the Logic for the Standard VoteObjects
         if(activeVote.GetType() == typeof(CharakterVoteObject))
         {
+            if(activeVote.Answer1 == "heavy")
+            {
 
+            }
+            else if(activeVote.Answer2 == "normal")
+            {
+
+            }
+            else if(activeVote.Answer3 == "light")
+            {
+
+            }
         }
         else if (activeVote.GetType() == typeof(EnviromentVoteObject))
         {
+            if (activeVote.Answer1 == "more")
+            {
 
+            }
+            else if (activeVote.Answer2 == "equal")
+            {
+
+            }
+            else if (activeVote.Answer3 == "less")
+            {
+
+            }
         }
         else if (activeVote.GetType() == typeof(BiomVoteObject))
         {
+            if (activeVote.Answer1 == "forest"|| activeVote.Answer1 == "jungle")
+            {
 
+            }
+            else if (activeVote.Answer2 == "snow"|| activeVote.Answer2 == "swamp")
+            {
+
+            }
+            else if (activeVote.Answer3 == "sand"|| activeVote.Answer3 == "ruins")
+            {
+
+            }
         }
 
         activeVote.Answercount1 = 0;

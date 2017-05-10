@@ -4,6 +4,8 @@ using System;
 
 public class QuestGenerator : IMapGenerator
 {
+
+    //TODO: Quest Logic Needed.
     public int[,] Generate()
     {
         return null;
