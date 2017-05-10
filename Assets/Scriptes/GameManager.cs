@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour , IGameManager
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
     Dictionary<int, string> deciderDict;
+
     private Map levelMap;
 
     private void Awake()
@@ -76,45 +77,45 @@ public class GameManager : MonoBehaviour , IGameManager
         //TODO: Add the Logic for the Standard VoteObjects
         if(activeVote.GetType() == typeof(CharakterVoteObject))
         {
-            if(activeVote.Answer1 == "heavy")
+            if(item == "heavy")
             {
 
             }
-            else if(activeVote.Answer2 == "normal")
+            else if(item == "normal")
             {
 
             }
-            else if(activeVote.Answer3 == "light")
+            else if(item == "light")
             {
 
             }
         }
         else if (activeVote.GetType() == typeof(EnviromentVoteObject))
         {
-            if (activeVote.Answer1 == "more")
+            if (item == "more")
             {
 
             }
-            else if (activeVote.Answer2 == "equal")
+            else if (item == "equal")
             {
 
             }
-            else if (activeVote.Answer3 == "less")
+            else if (item == "less")
             {
 
             }
         }
         else if (activeVote.GetType() == typeof(BiomVoteObject))
         {
-            if (activeVote.Answer1 == "forest"|| activeVote.Answer1 == "jungle")
+            if (item == "forest"|| item == "jungle")
             {
 
             }
-            else if (activeVote.Answer2 == "snow"|| activeVote.Answer2 == "swamp")
+            else if (item == "snow"|| item == "swamp")
             {
 
             }
-            else if (activeVote.Answer3 == "sand"|| activeVote.Answer3 == "ruins")
+            else if (item == "sand"|| item == "ruins")
             {
 
             }
