@@ -45,8 +45,7 @@ public class RegularExpression : MonoBehaviour
                     rowint = row.Value.ToUpper()[0] - 'A';
                     coloumint = int.Parse(coloum.Value);
 
-                    //do something here with the rowint and coloumint.
-
+                    //TODO: ADD the Morter and Artillerie logic here
                 }
                 else
                 {
