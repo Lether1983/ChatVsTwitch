@@ -156,4 +156,8 @@ public class CaveGenerator : IMapGenerator
         MapHeight = height;
         RandomMap = Randommap;
     }
+
+    public void Modify()
+    {
+    }
 }

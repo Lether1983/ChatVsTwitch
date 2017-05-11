@@ -20,7 +20,7 @@ public class TrapGenerator : IMapGenerator
         Mapwidth = width;
         Mapheight = height;
         RandomMap = Randommap;
-        count = UnityEngine.Random.Range(15, 35);
+        count = 20;
     }
 
     private void SpawnTrapsOnMap()
@@ -42,5 +42,10 @@ public class TrapGenerator : IMapGenerator
                 }
             }
         }
+    }
+
+    public void Modify()
+    {
+        //TODO: Logic to Modify the Generator
     }
 }

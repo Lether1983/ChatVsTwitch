@@ -44,4 +44,9 @@ public class TreeGenerator : IMapGenerator
             }
         }
     }
+
+    public void Modify()
+    {
+        //TODO: Logic to Modify the Generator
+    }
 }

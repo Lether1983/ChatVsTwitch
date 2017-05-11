@@ -42,4 +42,9 @@ public class StoneGenerator : IMapGenerator
             }
         }
     }
+
+    public void Modify()
+    {
+        //TODO: Logic to Modify the Generator
+    }
 }

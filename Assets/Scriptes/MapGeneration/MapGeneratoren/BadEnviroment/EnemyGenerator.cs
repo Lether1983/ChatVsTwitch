@@ -20,7 +20,7 @@ public class EnemyGenerator : IMapGenerator
         Mapwidth = width;
         Mapheight = height;
         RandomMap = Randommap;
-        count = UnityEngine.Random.Range(15, 35);
+        count = 20;
     }
 
     private void SpawnEnemys()
@@ -43,5 +43,10 @@ public class EnemyGenerator : IMapGenerator
                 }
             }
         }
+    }
+
+    public void Modify()
+    {
+        //TODO: Logic to Modify the Generator
     }
 }

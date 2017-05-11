@@ -11,6 +11,11 @@ public class QuestGenerator : IMapGenerator
         return null;
     }
 
+    public void Modify()
+    {
+        //TODO: Logic to Modify the Generator
+    }
+
     public void Setup(int width, int height, int[,] Randommap)
     {
     }

@@ -184,4 +184,8 @@ public class DungeonGenerator : IMapGenerator
         MapHeight = height;
         RandomMap = Randommap;
     }
+
+    public void Modify()
+    {
+    }
 }

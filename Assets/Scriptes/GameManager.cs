@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 public class GameManager : MonoBehaviour , IGameManager
 {
-
     public bool joinedTheChat;
     public string message;
     public IrcClient irc;
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour , IGameManager
     public List<Enemy> EnemyList;
     public Player player;
     public GameObject[,] map;
+    public Map levelMap;
 
     public TextAsset tileSheet;
     public Container container;
@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour , IGameManager
 
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
-    Dictionary<int, string> deciderDict;
 
-    private Map levelMap;
 
     private void Awake()
     {
@@ -59,70 +57,5 @@ public class GameManager : MonoBehaviour , IGameManager
         {
             message = irc.readMessages();
         }
-    }
-
-    public void decideTheVoteResult()
-    {
-        deciderDict = new Dictionary<int, string>();
-
-        deciderDict.Add(activeVote.Answercount1, activeVote.Answer1 );
-        deciderDict.Add(activeVote.Answercount2,activeVote.Answer2 );
-        deciderDict.Add(activeVote.Answercount3,activeVote.Answer3);
-
-        var list = deciderDict.Keys.ToList();
-        list.Sort();
-        Debug.Log(list[2]);
-        var item = deciderDict[list[2]];
-                Debug.Log(item);
-        //TODO: Add the Logic for the Standard VoteObjects
-        if(activeVote.GetType() == typeof(CharakterVoteObject))
-        {
-            if(item == "heavy")
-            {
-
-            }
-            else if(item == "normal")
-            {
-
-            }
-            else if(item == "light")
-            {
-
-            }
-        }
-        else if (activeVote.GetType() == typeof(EnviromentVoteObject))
-        {
-            if (item == "more")
-            {
-
-            }
-            else if (item == "equal")
-            {
-
-            }
-            else if (item == "less")
-            {
-
-            }
-        }
-        else if (activeVote.GetType() == typeof(BiomVoteObject))
-        {
-            if (item == "forest"|| item == "jungle")
-            {
-
-            }
-            else if (item == "snow"|| item == "swamp")
-            {
-
-            }
-            else if (item == "sand"|| item == "ruins")
-            {
-
-            }
-        }
-
-        activeVote.Answercount1 = 0;
-        activeVote.Answercount2 = 0;
-        activeVote.Answercount3 = 0;
     }
 }
