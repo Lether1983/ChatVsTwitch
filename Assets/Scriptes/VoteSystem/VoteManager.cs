@@ -9,6 +9,8 @@ public class VoteManager : MonoBehaviour
     public Dictionary<int, List<VoteObject>> LevelVotePlaner;
 
     Dictionary<int, string> deciderDict;
+    
+    
     //TODO: ADD some Functions to the VoteManager
     public void decideTheVoteResult()
     {
@@ -28,45 +30,61 @@ public class VoteManager : MonoBehaviour
         {
             if (item == "heavy")
             {
-
+                //Change the Standard Value + The Change Value
             }
             else if (item == "normal")
             {
-
+                //Nothing happend
             }
             else if (item == "light")
             {
-
+                //Change the Standard Value - The Change Value
+            }
+            else if(item == "yes")
+            {
+                //gmanager.levelMap.AddDecorater()
+            }
+            else if(item == "no")
+            {
+                //nothing happend
             }
         }
         else if (gmanager.activeVote.GetType() == typeof(EnviromentVoteObject))
         {
             if (item == "more")
             {
-
+                //Change the Standard Value + The Change Value
             }
             else if (item == "equal")
             {
-
+                //Nothing happend
             }
             else if (item == "less")
             {
-
+                //Change the Standard Value - The Change Value
+            }
+            else if (item == "yes")
+            {
+                //gmanager.levelMap.AddDecorater()
+            }
+            else if (item == "no")
+            {
+                //nothing happend
             }
         }
         else if (gmanager.activeVote.GetType() == typeof(BiomVoteObject))
         {
             if (item == "forest" || item == "jungle")
             {
-
+                // Standard Generation with all Generators
             }
             else if (item == "snow" || item == "swamp")
             {
-
+                // WIthout Stones
             }
             else if (item == "sand" || item == "ruins")
             {
-
+                //Without Trees
             }
         }
 
