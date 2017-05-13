@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -36,6 +37,13 @@ public class GameManager : MonoBehaviour , IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
+
+        //TODO: SUCCESSFULL TRY NEED A SECOND OPINION
+        /*
+        var type = Type.GetType(activeVote.Classname);
+        levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
+        */
+
         levelMap.CreateNewMap();
         meshGenerator.CreateMesh(levelMap);
     }

@@ -4,5 +4,4 @@ using UnityEngine;
 
 public class EnviromentVoteObject : VoteObject
 {
-    //TODO: Add Logic here for EnivormentVoteObject
 }

@@ -7,4 +7,5 @@ public class VoteObject : ScriptableObject
     public string Question;
     public string Answer1, Answer2, Answer3;
     public int Answercount1, Answercount2, Answercount3;
+    public string Classname;
 }

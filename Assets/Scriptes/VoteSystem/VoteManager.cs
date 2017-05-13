@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -42,7 +43,7 @@ public class VoteManager : MonoBehaviour
             }
             else if(item == "yes")
             {
-                //gmanager.levelMap.AddDecorater()
+                
             }
             else if(item == "no")
             {
@@ -86,6 +87,7 @@ public class VoteManager : MonoBehaviour
             {
                 //Without Trees
             }
+            
         }
 
         gmanager.activeVote.Answercount1 = 0;
