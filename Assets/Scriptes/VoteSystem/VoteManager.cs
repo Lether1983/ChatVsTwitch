@@ -27,7 +27,7 @@ public class VoteManager : MonoBehaviour
         var item = deciderDict[list[2]];
         Debug.Log(item);
         //TODO: Add the Logic for the Standard VoteObjects
-        if (gmanager.activeVote.GetType() == typeof(CharakterVoteObject))
+        if (gmanager.activeVote is CharakterVoteObject)
         {
             if (item == "heavy")
             {
@@ -50,7 +50,7 @@ public class VoteManager : MonoBehaviour
                 //nothing happend
             }
         }
-        else if (gmanager.activeVote.GetType() == typeof(EnviromentVoteObject))
+        else if (gmanager.activeVote is EnviromentVoteObject)
         {
             if (item == "more")
             {
@@ -73,7 +73,7 @@ public class VoteManager : MonoBehaviour
                 //nothing happend
             }
         }
-        else if (gmanager.activeVote.GetType() == typeof(BiomVoteObject))
+        else if (gmanager.activeVote is BiomVoteObject)
         {
             if (item == "forest" || item == "jungle")
             {
