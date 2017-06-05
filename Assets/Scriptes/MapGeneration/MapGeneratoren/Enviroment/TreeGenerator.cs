@@ -21,7 +21,7 @@ public class TreeGenerator : IMapGenerator
         Mapwidth = width;
         Mapheight = height;
         RandomMap = Randommap;
-        count = Mapwidth * Mapheight / 8;
+        count = (Mapwidth - 20) * Mapheight / 8;
     }
 
     private void SpawnTreesOnMap()
@@ -31,7 +31,7 @@ public class TreeGenerator : IMapGenerator
             int tempX = UnityEngine.Random.Range(0, Mapwidth);
             int tempY = UnityEngine.Random.Range(0, Mapheight);
 
-            if (RandomMap[tempX, tempY] != 0)
+            if (RandomMap[tempX, tempY] != 1)
             {
                 x--;
             }
@@ -39,7 +39,7 @@ public class TreeGenerator : IMapGenerator
             {
                 if (tempX < 50 || tempX > 70)
                 {
-                    RandomMap[tempX, tempY] = 9;
+                    RandomMap[tempX, tempY] = 1 + 4 + 32768;
                 }
             }
         }

@@ -17,8 +17,8 @@ public class DungeonGenerator : IMapGenerator
     public void GenerateTowns(int width, int heigth)
     {
         Position CenterOfMap = new Position(MapWidth / 2, MapHeight / 2);
-        Room CenterRoom = new Room(CenterOfMap, 5, 5, 2);
-        FillElement(CenterRoom, 2);
+        Room CenterRoom = new Room(CenterOfMap, 5, 5, 9);
+        FillElement(CenterRoom, 9);
 
         for (int i = 0; i < 25; i++)
         {
@@ -35,11 +35,11 @@ public class DungeonGenerator : IMapGenerator
                 Room newRoom;
                 if (ChooseElement == 0)
                 {
-                    newRoom = NewRandomRoom(Wall, 10, 10, 2);
+                    newRoom = NewRandomRoom(Wall, 10, 10, 9);
                 }
                 else
                 {
-                    newRoom = newRandomWay(Wall, 2, 10, 3);
+                    newRoom = newRandomWay(Wall, 2, 10, 17);
                 }
                 Position roomPosition = Wall;
                 switch (CheckDoorDirection(Wall))
@@ -63,7 +63,7 @@ public class DungeonGenerator : IMapGenerator
                 if (ScanArea(newRoom))
                 {
                     FillElement(newRoom, newRoom.Number);
-                    RandomMap[Wall.x, Wall.y] = 4;
+                    RandomMap[Wall.x, Wall.y] = 1 + 8 + 4 + 1024;
                     break;
                 }
             }
@@ -75,15 +75,15 @@ public class DungeonGenerator : IMapGenerator
         int rightNumber = RandomMap[Wall.x + 1, Wall.y];
         int leftNumber = RandomMap[Wall.x - 1, Wall.y];
         int upNumber = RandomMap[Wall.x, Wall.y - 1];
-        if (rightNumber == 2)
+        if (rightNumber == 9)
         {
             return Direction.West;
         }
-        if (leftNumber == 2)
+        if (leftNumber == 9)
         {
             return Direction.East;
         }
-        if (upNumber == 2)
+        if (upNumber == 9)
         {
             return Direction.South;
         }
@@ -130,7 +130,7 @@ public class DungeonGenerator : IMapGenerator
         int leftNumber = RandomMap[posX - 1, posY];
         int upNumber = RandomMap[posX, posY - 1];
         int downNumber = RandomMap[posX, posY + 1];
-        if (chooseNumber == 0 && (leftNumber == 2 || rightNumber == 2 || upNumber == 2 || downNumber == 2))
+        if ((chooseNumber & 1) > 0 && (leftNumber == 9 || rightNumber == 9 || upNumber == 9 || downNumber == 9))
         {
             return true;
         }
@@ -169,7 +169,7 @@ public class DungeonGenerator : IMapGenerator
                 if (x < 0 || y < 0 || x >= RandomMap.GetLength(0) || y >= RandomMap.GetLength(1))
                     continue;
 
-                if (RandomMap[x, y] == 2 || RandomMap[x, y] == 1 || RandomMap[x, y] == 3)
+                if (RandomMap[x, y] != 1)
                 {
                     return false;
                 }
@@ -178,7 +178,7 @@ public class DungeonGenerator : IMapGenerator
         return true;
     }
 
-    public void Setup(int width, int height,int[,] Randommap)
+    public void Setup(int width, int height, int[,] Randommap)
     {
         MapWidth = width;
         MapHeight = height;

@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour , IGameManager
 
     public TextAsset tileSheet;
     public Container container;
-    public MeshGenerator meshGenerator;
+    [SerializeField]
+    private CaveTesselator tesselator = null;
 
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
@@ -45,7 +46,40 @@ public class GameManager : MonoBehaviour , IGameManager
         */
 
         levelMap.CreateNewMap();
-        meshGenerator.CreateMesh(levelMap);
+        tesselator.Tesselate();
+        for (int x = 0; x < levelMap.MapWidth; x++)
+        {
+            for (int y = 0; y < levelMap.MapHeight; y++)
+            {
+                if ((levelMap.Get(x, y) & 4) > 0)
+                {
+                    var entity = levelMap.Get(x, y) >> 10;
+                   
+                    switch (entity)
+                    {
+                        case 1: // door
+                            break;
+                        case 2: // dpol
+                            break;
+                        case 4: // Mine
+                            break;
+                        case 8: // Target
+                            break;
+                        case 16: // Bush
+                            break;
+                        case 32: // Tree
+                            break;
+                        case 64: // Stone
+                            break;
+                        case 128: // Trap
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        //meshGenerator.CreateMesh(levelMap);
     }
 
     public void SendMessages()

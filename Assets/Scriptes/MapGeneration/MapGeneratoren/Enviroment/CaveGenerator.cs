@@ -38,9 +38,9 @@ public class CaveGenerator : IMapGenerator
     {
         int numOfWalls = GetAdjacentWalls(x, y, 1, 1);
 
-        if (numOfWalls >= 4 && RandomMap[x, y] == 1) return 1;
-        else if (numOfWalls >= 5) return 1;
-        else return 0;
+        if (numOfWalls >= 4 && RandomMap[x, y] == 2) return 2;
+        else if (numOfWalls >= 5) return 2;
+        else return 1;
     }
 
     private int GetAdjacentWalls(int x, int y, int p1, int p2)
@@ -74,11 +74,11 @@ public class CaveGenerator : IMapGenerator
         {
             return true;
         }
-        if (RandomMap[iX, iY] == 1)
+        if ((RandomMap[iX, iY] & 2) > 0)
         {
             return true;
         }
-        if (RandomMap[iX, iY] == 0)
+        if ((RandomMap[iX, iY] & 1) > 0)
         {
             return false;
         }
@@ -109,19 +109,19 @@ public class CaveGenerator : IMapGenerator
             {
                 if (x == 0)
                 {
-                    RandomMap[x, y] = 1;
+                    RandomMap[x, y] = 2;
                 }
                 else if (x == MapWidth - 1)
                 {
-                    RandomMap[x, y] = 1;
+                    RandomMap[x, y] = 2;
                 }
                 else if (y == 0)
                 {
-                    RandomMap[x, y] = 1;
+                    RandomMap[x, y] = 2;
                 }
                 else if (y == MapHeight - 1)
                 {
-                    RandomMap[x, y] = 1;
+                    RandomMap[x, y] = 2;
                 }
                 else
                 {
@@ -129,7 +129,7 @@ public class CaveGenerator : IMapGenerator
 
                     if (y == MapMiddle)
                     {
-                        RandomMap[x, y] = 0;
+                        RandomMap[x, y] = 1;
                     }
                     else
                     {
@@ -144,9 +144,9 @@ public class CaveGenerator : IMapGenerator
     {
         if (UnityEngine.Random.Range(0, 100) <= PercentareWalls)
         {
-            return 1;
+            return 2;
         }
-        return 0;
+        return 1;
     }
 
 

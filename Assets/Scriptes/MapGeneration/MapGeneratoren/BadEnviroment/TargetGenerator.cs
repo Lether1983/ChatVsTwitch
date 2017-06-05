@@ -31,13 +31,13 @@ public class TargetGenerator : IMapGenerator
             int tempX = UnityEngine.Random.Range(Mapwidth - 20, Mapwidth);
             int tempY = UnityEngine.Random.Range(0, MapHeight);
 
-            if (RandomMap[tempX, tempY] != 0)
+            if (RandomMap[tempX, tempY] != 1)
             {
                 PlaceTaget();
             }
             else
             {
-                RandomMap[tempX, tempY] = 7;
+                RandomMap[tempX, tempY] = 1 + 4 + 8192;
             }
         }
     }

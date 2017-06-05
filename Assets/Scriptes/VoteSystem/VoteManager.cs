@@ -81,7 +81,7 @@ public class VoteManager : MonoBehaviour
             }
             else if (item == "snow" || item == "swamp")
             {
-                // WIthout Stones
+                // Without Stones
             }
             else if (item == "sand" || item == "ruins")
             {
