@@ -28,9 +28,9 @@ public class EnemyGenerator : IMapGenerator
         int temp = 0;
         for (int i = 0; i < count; i++)
         {
-            int tempX = UnityEngine.Random.Range(15, Mapwidth-20);
+            int tempX = UnityEngine.Random.Range(15, Mapwidth - 20);
             int tempY = UnityEngine.Random.Range(0, Mapheight);
-            if (RandomMap[tempX,tempY] != 0)
+            if (RandomMap[tempX, tempY] != 1)
             {
                 i--;
             }
@@ -38,7 +38,7 @@ public class EnemyGenerator : IMapGenerator
             {
                 if (temp <= count)
                 {
-                    RandomMap[tempX, tempY] = 5;
+                    RandomMap[tempX, tempY] = 1 + 4 + 2048;
                     temp++;
                 }
             }

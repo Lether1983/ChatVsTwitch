@@ -32,13 +32,13 @@ public class StoneGenerator : IMapGenerator
             int tempX = UnityEngine.Random.Range(0, Mapwidth);
             int tempY = UnityEngine.Random.Range(0, Mapheight);
 
-            if (RandomMap[tempX, tempY] != 0)
+            if (RandomMap[tempX, tempY] != 1)
             {
                 x--;
             }
             else
             {
-                RandomMap[tempX, tempY] = 10;
+                RandomMap[tempX, tempY] = 1 + 4 + 65536;
             }
         }
     }

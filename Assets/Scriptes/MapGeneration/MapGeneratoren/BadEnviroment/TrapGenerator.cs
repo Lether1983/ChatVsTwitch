@@ -30,7 +30,7 @@ public class TrapGenerator : IMapGenerator
             int tempX = UnityEngine.Random.Range(0, Mapwidth);
             int tempY = UnityEngine.Random.Range(0, Mapheight);
 
-            if (RandomMap[tempX, tempY] != 0)
+            if (RandomMap[tempX, tempY] != 1)
             {
                 x--;
             }
@@ -38,7 +38,7 @@ public class TrapGenerator : IMapGenerator
             {
                 if (tempX < 50 || tempX > 70)
                 {
-                    RandomMap[tempX, tempY] = 11;
+                    RandomMap[tempX, tempY] = 1 + 4 + 131072;
                 }
             }
         }

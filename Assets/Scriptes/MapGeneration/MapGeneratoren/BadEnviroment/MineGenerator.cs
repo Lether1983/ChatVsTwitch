@@ -29,16 +29,16 @@ public class MineGenerator : IMapGenerator
         for (int i = 0; i < count; i++)
         {
             int tempX = UnityEngine.Random.Range(15, 55);
-            int tempY = UnityEngine.Random.Range(5, Mapheight-5);
-            if(RandomMap[tempX,tempY] != 0)
+            int tempY = UnityEngine.Random.Range(5, Mapheight - 5);
+            if (RandomMap[tempX, tempY] != 1)
             {
                 i--;
             }
             else
             {
-                if(temp <= count)
+                if (temp <= count)
                 {
-                    RandomMap[tempX, tempY] = 6;
+                    RandomMap[tempX, tempY] = 1 + 4 + 4096;
                     temp++;
                 }
             }

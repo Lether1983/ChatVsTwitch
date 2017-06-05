@@ -20,6 +20,16 @@ public class Map
         RandomMap = new int[MapWidth, MapHeight];
     }
 
+    public int Get(Vector2 v)
+    {
+        return RandomMap[(int)v.x,(int)v.y];
+    }
+
+    public int Get(int x, int y)
+    {
+        return RandomMap[x,y];
+    }
+
     public void AddDecorater(IMapGenerator decorater)
     {
         ActiveMap.Add(decorater);
