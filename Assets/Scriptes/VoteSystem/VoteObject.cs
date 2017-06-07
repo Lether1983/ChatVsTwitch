@@ -11,5 +11,5 @@ public class VoteObject : ScriptableObject
     public string Classname;
 
     [ClassImplements(typeof(IMapGenerator), AllowAbstract = false)]
-    public ClassTypeReference[] Thingy;
+    public ClassTypeReference[] Generators;
 }

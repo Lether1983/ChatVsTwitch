@@ -193,27 +193,52 @@
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0,1</point_f>
+            <point_f>0.5,0.5</point_f>
             <key>writePivotPoints</key>
             <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Baum.png</key>
+            <key type="filename">C:/Users/Vincent/Dropbox/Referenzen/Bush.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>16,20,32,39</rect>
+                <rect>16,16,33,32</rect>
                 <key>scale9Paddings</key>
-                <rect>16,20,32,39</rect>
+                <rect>16,16,33,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">C:/Users/Vincent/Dropbox/Referenzen/Tanne2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>21,39,43,77</rect>
+                <key>scale9Paddings</key>
+                <rect>21,39,43,77</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">C:/Users/Vincent/Dropbox/Referenzen/boulder.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>40,32,80,64</rect>
+                <key>scale9Paddings</key>
+                <rect>40,32,80,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
             <key type="filename">BlackTile.png</key>
-            <key type="filename">Rock_Placeholder.png</key>
             <key type="filename">Stone.png</key>
             <key type="filename">Trap_Placeholder.png</key>
             <key type="filename">Wall.png</key>
@@ -225,6 +250,7 @@
             <key type="filename">gras.png</key>
             <key type="filename">kacheln.png</key>
             <key type="filename">pflaster.png</key>
+            <key type="filename">../../../../barracks-simulator/Source/GPD414_AP_VincentBendigs_BarracksSimulatorPrototyp/Assets/Resources/Sprites/Objects/tuer_normal_front.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -234,6 +260,19 @@
                 <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
                 <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../../Users/Vincent/Desktop/smoke_grenade.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,32,32,64</rect>
+                <key>scale9Paddings</key>
+                <rect>16,32,32,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -251,9 +290,12 @@
             <filename>pflaster.png</filename>
             <filename>Wall.png</filename>
             <filename>Stone.png</filename>
-            <filename>Rock_Placeholder.png</filename>
             <filename>Trap_Placeholder.png</filename>
-            <filename>Baum.png</filename>
+            <filename>C:/Users/Vincent/Dropbox/Referenzen/Tanne2.png</filename>
+            <filename>C:/Users/Vincent/Dropbox/Referenzen/boulder.png</filename>
+            <filename>C:/Users/Vincent/Dropbox/Referenzen/Bush.png</filename>
+            <filename>../../../../barracks-simulator/Source/GPD414_AP_VincentBendigs_BarracksSimulatorPrototyp/Assets/Resources/Sprites/Objects/tuer_normal_front.png</filename>
+            <filename>../../../../../Users/Vincent/Desktop/smoke_grenade.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
