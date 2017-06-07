@@ -23,4 +23,12 @@ public class LookToMouseCursor : MonoBehaviour
     {
         return Mathf.Atan2(positionOnScreen.y - mouseOnScreen.y, positionOnScreen.x - mouseOnScreen.x) * Mathf.Rad2Deg;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name == "ColliderPrefab(Clone)")
+        {
+            Debug.Log("Penis");
+        }
+    }
 }

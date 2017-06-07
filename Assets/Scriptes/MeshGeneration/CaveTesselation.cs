@@ -71,7 +71,9 @@ public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, IEdgeG
          * 16384,"Bush",
          * 32768,"Tree",
          * 65536,"Stone",
-         * 131072,"Trap"
+         * 131072,"Trap",
+         * 262144,"Spawnpoint",
+         * 524288,"Exitpoint"
          * 
          */
 
