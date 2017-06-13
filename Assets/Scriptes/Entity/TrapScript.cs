@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineScript : MonoBehaviour
+public class TrapScript : MonoBehaviour
 {
     [SerializeField]
-    private int damage = 70;
+    private int damage = 25;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Player>().getDamage(damage);
+        collision.GetComponent<Player>().getDamage(damage);
         Destroy(this.gameObject);
     }
 }
