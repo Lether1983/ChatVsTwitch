@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour , IGameManager
         container = JsonUtility.FromJson<Container>(tileSheet.text);
     }
 
+    internal void RespawnPlayer()
+    {
+
+    }
+
     void Start()
     {
         irc = new IrcClient("irc.twitch.tv", 6667, "missionagainstchatbot", "oauth:f4rfrtulipsiiqbdoaqdb2s7nhr2ou");
