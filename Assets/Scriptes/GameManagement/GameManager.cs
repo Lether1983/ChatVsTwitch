@@ -4,19 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public class GameManager : MonoBehaviour , IGameManager
+public class GameManager : MonoBehaviour, IGameManager
 {
     public bool joinedTheChat;
     public string message;
+    public int Try = 0;
     public IrcClient irc;
     public VoteObject activeVote;
     public List<Enemy> EnemyList;
     public Player player;
     public GameObject[,] map;
     public Map levelMap;
-
     public TextAsset tileSheet;
     public Container container;
+
     [SerializeField]
     private CaveTesselator tesselator = null;
     [SerializeField]
@@ -29,11 +30,6 @@ public class GameManager : MonoBehaviour , IGameManager
     private void Awake()
     {
         container = JsonUtility.FromJson<Container>(tileSheet.text);
-    }
-
-    internal void RespawnPlayer()
-    {
-
     }
 
     void Start()
@@ -57,6 +53,7 @@ public class GameManager : MonoBehaviour , IGameManager
         levelMap.CreateNewMap();
         tesselator.Tesselate();
         sManager.SpawnObjects(levelMap);
+        sManager.SpawnPlayer(levelMap);
     }
 
     public void SendMessages()
@@ -72,7 +69,7 @@ public class GameManager : MonoBehaviour , IGameManager
 
     void Update()
     {
-        if(joinedTheChat)
+        if (joinedTheChat)
         {
             message = irc.readMessages();
         }

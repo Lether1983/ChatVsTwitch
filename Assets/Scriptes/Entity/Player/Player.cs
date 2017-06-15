@@ -31,7 +31,6 @@ public class Player : Entitys
         if (health <= 0)
         {
             lifes--;
-            gmanager.RespawnPlayer();
         }
     }
 

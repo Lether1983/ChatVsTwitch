@@ -9,6 +9,11 @@ public class SpawnManager : MonoBehaviour
     private TileManager tManager;
 
     [SerializeField]
+    private GameObject Player;
+    [SerializeField]
+    private GameObject Camera;
+
+    [SerializeField]
     private SpawnObject[] spawnObjects = null;
 
     public void SpawnObjects(Map levelMap)
@@ -31,6 +36,24 @@ public class SpawnManager : MonoBehaviour
                             }
                             break;
                         }
+                    }
+                }
+            }
+        }
+    }
+    public void SpawnPlayer(Map levelmap)
+    {
+        for (int x = 0; x < levelmap.MapWidth; x++)
+        {
+            for (int y = 0; y < levelmap.MapHeight; y++)
+            {
+                if ((levelmap.Get(x, y) & 4) > 0)
+                {
+                    var entity = levelmap.Get(x, y) >> 10;
+                    if (entity == 256)
+                    {
+                        Instantiate(Player, new Vector2(x, y), Quaternion.identity);
+                        Instantiate(Camera, new Vector3(x, y,-10), Quaternion.identity);
                     }
                 }
             }
