@@ -30,6 +30,7 @@ public class FireWeapon : MonoBehaviour
                     BulletPool[i].transform.position = transform.position;
                     BulletPool[i].transform.rotation = transform.rotation;
                     BulletPool[i].SetActive(true);
+                    BulletPool[i].GetComponent<Rigidbody2D>().AddForce(BulletPool[i].transform.right*250);
                     break;
                 }
             }

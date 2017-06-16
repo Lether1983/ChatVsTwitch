@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : Entitys
 {
+    private int health = 100;
     Weapon myWeapon;
     Armor myArmor;
     Uniform mySkin;
@@ -25,6 +26,14 @@ public class Enemy : Entitys
 
     }
 
+    public void getDamage(int damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
     public void CreateNewEnemy()
     {
         for (int i = 0; i < EntityDecorator.Count; i++)
