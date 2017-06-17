@@ -3,14 +3,14 @@ using System.Collections;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D rb;
     float Timer = 0;
-    int Damage = 10;
+    public int Damage;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")

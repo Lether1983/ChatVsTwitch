@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Player : Entitys
     private int health = 100;
     [SerializeField]
     private int lifes = 3;
+    private int Armorpoints;
 
 
 
@@ -23,11 +25,29 @@ public class Player : Entitys
         EntityDecorator.Add(new ArmorGenerator());
         EntityDecorator.Add(new UniformGenerator());
         CreateNewPlayer();
+        Armorpoints = getArmorPoints();
+    }
+
+    private int getArmorPoints()
+    {
+        return myArmor.ArmorPoints;
+    }
+
+    public int getFirePower()
+    {
+        return myWeapon.Damage;
     }
 
     public void getDamage(int Damage)
     {
-        health -= Damage;
+        if (Armorpoints <= 0)
+        {
+            health -= Damage;
+        }
+        else
+        {
+            Armorpoints -= Damage;
+        }
         if (health <= 0)
         {
             lifes--;
