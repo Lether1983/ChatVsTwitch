@@ -25,7 +25,7 @@ public class Player : Entitys
         EntityDecorator.Add(new ArmorGenerator());
         EntityDecorator.Add(new UniformGenerator());
         CreateNewPlayer();
-        Armorpoints = getArmorPoints();
+        //Armorpoints = getArmorPoints();
     }
 
     private int getArmorPoints()
