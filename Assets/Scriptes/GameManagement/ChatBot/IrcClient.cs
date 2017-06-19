@@ -8,6 +8,7 @@ public class IrcClient
     public string UserName;
     private const string botName = "MissionAgainstChatBot";
     private string channel;
+    private string targetUser = "lether";
 
     private TcpClient tcpClient;
     private StreamReader inputStream;
@@ -71,6 +72,12 @@ public class IrcClient
     {
         sendIrcMessage(":" + UserName + "!" + UserName + "@" + UserName +
                 ".tmi.twitch.tv PRIVMSG #" + channel + " :" + message);
+    }
+
+    public void sendPrivateWhisper(string message)
+    {
+        sendIrcMessage(":" + UserName + "!" + UserName + "@" + UserName +
+                ".tmi.twitch.tv PRIVMSG #" + channel + " : /w " + targetUser + " " + message);
     }
 
 

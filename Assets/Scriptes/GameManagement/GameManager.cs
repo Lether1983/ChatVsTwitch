@@ -60,6 +60,10 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         irc.sendPublicChatMessage("Kevin ist ein Penis");
     }
+    public void SendWhisper()
+    {
+        irc.sendPrivateWhisper("les-lee is a dick");
+    }
 
     public void JoinChat()
     {
