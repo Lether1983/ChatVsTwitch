@@ -13,6 +13,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject Camera;
 
+    private GameObject ActivePlayer;
+
+    public GameObject GetPlayer
+    {
+        get { return ActivePlayer; }
+    }
+
+
     [SerializeField]
     private SpawnObject[] spawnObjects = null;
 
@@ -52,7 +60,7 @@ public class SpawnManager : MonoBehaviour
                     var entity = levelmap.Get(x, y) >> 10;
                     if (entity == 256)
                     {
-                        Instantiate(Player, new Vector2(x, y), Quaternion.identity);
+                        ActivePlayer = Instantiate(Player, new Vector2(x, y), Quaternion.identity) as GameObject;
                         Instantiate(Camera, new Vector3(x, y,-10), Quaternion.identity);
                     }
                 }

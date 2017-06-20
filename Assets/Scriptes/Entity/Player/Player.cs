@@ -15,7 +15,8 @@ public class Player : Entitys
     private int lifes = 3;
     private int Armorpoints;
 
-
+    public int Health {get{ return health; }}
+    public int Lifes { get { return lifes; }}
 
     void Start()
     {
