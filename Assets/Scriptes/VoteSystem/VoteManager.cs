@@ -49,12 +49,17 @@ public class VoteManager : MonoBehaviour
             {
                 //nothing happend
             }
+            
         }
         else if (gmanager.activeVote is EnviromentVoteObject)
         {
             if (item == "more")
             {
                 //Change the Standard Value + The Change Value
+                if(gmanager.activeVote.name == "AirStrikeVote")
+                {
+                    //send more as one Airstrike
+                }
             }
             else if (item == "equal")
             {
@@ -71,6 +76,14 @@ public class VoteManager : MonoBehaviour
             else if (item == "no")
             {
                 //nothing happend
+            }
+            else if (item == "fake")
+            {
+                // Send fake Packet
+            }
+            else if(item == "enemy")
+            {
+                //SpawnEnemys not Rebels
             }
         }
         else if (gmanager.activeVote is BiomVoteObject)
