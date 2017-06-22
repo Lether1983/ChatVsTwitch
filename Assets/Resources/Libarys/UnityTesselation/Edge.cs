@@ -1,6 +1,8 @@
-﻿namespace UnityTesselation
+﻿using UnityTesselation.Contracts;
+
+namespace UnityTesselation
 {
-	public struct Edge<TPosition>
+	public struct Edge<TPosition> : ICollision
 	{
 		private TPosition v1, v2;
 

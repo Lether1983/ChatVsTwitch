@@ -14,21 +14,25 @@ namespace UnityTesselation
 			shape.AddNode(factory.Create(shape.Area, point));
 		}
 
-		public static void CreateCollider<TNode, TPosition, TKey>(
+		public static void CreateCollider<TCollision, TNode, TPosition, TKey>(
 			this Shape<TNode, TPosition, TKey> shape,
-			IEdgeGenerator<TNode, TPosition, TKey> edgeGenerator,
-			IColliderTransform<TPosition> colliderTransform) where TNode : INode<TPosition, TKey>
+			ICollisionGenerator<TCollision, TNode, TPosition, TKey> collisionGenerator,
+			IColliderTransform<TCollision> colliderTransform)
+			where TCollision : ICollision
+			where TNode : INode<TPosition, TKey>
 		{
 			foreach (var node in shape.OuterNodes)
 			{
-				colliderTransform.Consume(edgeGenerator.Generate(node));
+				colliderTransform.Consume(collisionGenerator.Generate(node));
 			}
 		}
-		
+
 		public static void CreateMesh<TVertex, TNode, TPosition, TKey>(
 			this Shape<TNode, TPosition, TKey> shape,
 			IVertexGenerator<TVertex, TNode, TPosition, TKey> vertexGenerator,
-			IMeshTransform<TVertex> meshTransform) where TNode : INode<TPosition, TKey>
+			IMeshTransform<TVertex> meshTransform)
+			where TVertex : IVertex
+			where TNode : INode<TPosition, TKey>
 		{
 			foreach (var node in shape.Nodes)
 			{

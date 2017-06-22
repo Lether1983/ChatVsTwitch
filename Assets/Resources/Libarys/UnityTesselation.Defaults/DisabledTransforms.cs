@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityTesselation.Contracts;
 using UnityTesselation.Contracts.Generators;
 
 namespace UnityTesselation.Defaults
 {
-	public sealed class DisabledColliderTransform<TPosition> : DisabledTransform<Edge<TPosition>>, IColliderTransform<TPosition> { }
+	public sealed class DisabledColliderTransform<TCollision> : DisabledTransform<TCollision>, IColliderTransform<TCollision> where TCollision : ICollision { }
 
-	public sealed class DisabledMeshTransform<TVertex> : DisabledTransform<TVertex>, IMeshTransform<TVertex> { }
+	public sealed class DisabledMeshTransform<TVertex> : DisabledTransform<TVertex>, IMeshTransform<TVertex> where TVertex : IVertex { }
 
 	public class DisabledTransform<T>
 	{

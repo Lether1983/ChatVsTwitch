@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace UnityTesselation
+namespace UnityTesselation.Defaults
 {
-	public class Vertex
+	public struct Vertex : IVector3Vertex
 	{
 		public Vector3 Location { get; set; }
 	}

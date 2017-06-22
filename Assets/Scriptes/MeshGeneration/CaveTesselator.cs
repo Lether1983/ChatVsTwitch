@@ -7,18 +7,18 @@ using UnityTesselation.Contracts.Factories;
 using UnityTesselation.Contracts.Generators;
 using UnityTesselation.Defaults;
 
-public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMeshTransformProvider<CaveVertex, int>, IColliderTransformProvider<Vector2, int>, INodeFactory<CaveNode, Vector2, int>
+public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMeshTransformProvider<CaveVertex, int>, IColliderTransformProvider<Edge<Vector2>, int>, INodeFactory<CaveNode, Vector2, int>
 {
     [SerializeField]
     private CaveColliderTransform colliderPrefab = null;
-    private Dictionary<int, IColliderTransform<Vector2>> colliders = new Dictionary<int, IColliderTransform<Vector2>>();
+    private Dictionary<int, IColliderTransform<Edge<Vector2>>> colliders = new Dictionary<int, IColliderTransform<Edge<Vector2>>>();
     private Dictionary<int, IMeshTransform<CaveVertex>> meshes = new Dictionary<int, IMeshTransform<CaveVertex>>();
     [SerializeField]
     private CaveMeshTransform meshPrefab = null;
     [SerializeField]
     private CaveTesselation tessalation = null;
 
-    protected override IColliderTransformProvider<Vector2, int> ColliderTransformProvider
+    protected override IColliderTransformProvider<Edge<Vector2>, int> ColliderTransformProvider
     {
         get
         {
@@ -26,7 +26,7 @@ public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMes
         }
     }
 
-    protected override IEdgeGenerator<CaveNode, Vector2, int> EdgeGenerator
+    protected override ICollisionGenerator<Edge<Vector2>, CaveNode, Vector2, int> CollisionGenerator
     {
         get
         {
@@ -71,11 +71,11 @@ public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMes
         return new CaveNode(self, point, tessalation.GameManager.levelMap.Get(point) >> 3);
     }
 
-    IColliderTransform<Vector2> IColliderTransformProvider<Vector2, int>.Get(Area<int> area)
+    IColliderTransform<Edge<Vector2>> IColliderTransformProvider<Edge<Vector2>, int>.Get(Area<int> area)
     {
         if (area.Key == 2)
         {
-            var collider = default(IColliderTransform<Vector2>);
+            var collider = default(IColliderTransform<Edge<Vector2>>);
             if(!colliders.TryGetValue(area.Key,out collider))
             {
                 collider = colliders[area.Key] = Instantiate(colliderPrefab, transform, false);
@@ -84,7 +84,7 @@ public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMes
         }
         else
         {
-            return new DisabledColliderTransform<Vector2>();
+            return new DisabledColliderTransform<Edge<Vector2>>();
         }
     }
 

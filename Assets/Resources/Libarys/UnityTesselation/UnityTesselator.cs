@@ -6,15 +6,22 @@ using UnityTesselation.Contracts.Generators;
 
 namespace UnityTesselation
 {
-	public abstract class UnityTesselator<TVertex, TNode, TPosition, TKey> : MonoBehaviour where TNode : INode<TPosition, TKey>
+	public abstract class UnityTesselator<TCollision, TVertex, TNode, TPosition, TKey> : MonoBehaviour
+		where TCollision : ICollision
+		where TVertex : IVertex
+		where TNode : INode<TPosition, TKey>
 	{
-		protected abstract IColliderTransformProvider<TPosition, TKey> ColliderTransformProvider { get; }
+		protected abstract IColliderTransformProvider<TCollision, TKey> ColliderTransformProvider { get; }
 
-		protected abstract IEdgeGenerator<TNode, TPosition, TKey> EdgeGenerator { get; }
+		protected abstract ICollisionGenerator<TCollision, TNode, TPosition, TKey> CollisionGenerator { get; }
+
+		protected abstract IEqualityComparer<TKey> KeyComparer { get; }
 
 		protected abstract IMeshTransformProvider<TVertex, TKey> MeshTransformProvider { get; }
 
 		protected abstract INodeFactory<TNode, TPosition, TKey> NodeFactory { get; }
+
+		protected abstract IEqualityComparer<TPosition> PositionComparer { get; }
 
 		protected abstract ITesselation<TPosition, TKey> Tesselation { get; }
 
@@ -22,94 +29,152 @@ namespace UnityTesselation
 
 		public void Tesselate()
 		{
-			var state = new State();
-
+			var state = new State(this);
 			// First Pass: Discover Areas/Shapes/Nodes
-			var availablePoints = new List<TPosition>(Tesselation.Points());
-			var inactivePoints = new List<TPosition>(availablePoints.Count);
-			while (availablePoints.Count > 0)
-			{
-				var reference = availablePoints[0];
-				var key = Tesselation.Key(reference);
-				var shape = state.CreateShape(key);
-
-				var activePoints = new List<TPosition>() { availablePoints[0] };
-				var innerInActivePoints = new List<TPosition>();
-				while (activePoints.Count > 0)
-				{
-					var newActivePoints = new List<TPosition>();
-					for (int apIndex = 0; apIndex < activePoints.Count; apIndex++)
-					{
-						var v = activePoints[apIndex];
-						availablePoints.Remove(v);
-						shape.AddNode(NodeFactory, v);
-
-						int index = 0;
-						foreach (var vs in Tesselation.Surround(v))
-						{
-							try
-							{
-								if (!Tesselation.Valid(vs) || !Tesselation.Tesselate(index))
-								{
-									continue;
-								}
-							}
-							finally
-							{
-								index++;
-							}
-
-							if (!Equals(key, Tesselation.Key(vs)))
-								continue;
-
-							if (!(inactivePoints.Contains(vs) || innerInActivePoints.Contains(vs) || newActivePoints.Contains(vs)))
-								newActivePoints.Add(vs);
-						}
-					}
-
-					innerInActivePoints.AddRange(activePoints);
-					activePoints = newActivePoints;
-				}
-
-				inactivePoints.AddRange(innerInActivePoints);
-			}
+			FirstPass(state);
 
 			// Second Pass: Connect Shapes
-			foreach (var shape in state.Shapes)
+			SecondPass(state);
+
+			// Third Pass: Create Mesh/Edges per Area
+			ThirdPass(state);
+		}
+
+		private static TPosition GetReference(HashSet<TPosition> skippedPoints)
+		{
+			var reference = default(TPosition);
+			using (var skippedPointsEnumerator = ((IEnumerable<TPosition>)skippedPoints).GetEnumerator())
 			{
-				foreach (var node in shape.Nodes)
+				skippedPointsEnumerator.MoveNext();
+				reference = skippedPointsEnumerator.Current;
+			}
+			skippedPoints.Remove(reference);
+			return reference;
+		}
+
+		private void FirstPass(State state)
+		{
+			var skippedPoints = new HashSet<TPosition>(PositionComparer) { default(TPosition) };
+
+			var activePoints = new HashSet<TPosition>(PositionComparer);
+			var newActivePoints = new HashSet<TPosition>(PositionComparer);
+			var inactivePoints = new HashSet<TPosition>(PositionComparer);
+
+			var index = 0;
+			var testIndex = 0;
+			var reference = default(TPosition);
+			var key = default(TKey);
+			var shape = default(Shape<TNode, TPosition, TKey>);
+
+			while (skippedPoints.Count > 0)
+			{
+				reference = GetReference(skippedPoints);
+				key = Tesselation.Key(reference);
+				shape = state.CreateShape(key);
+
+				activePoints.Clear();
+				activePoints.Add(reference);
+
+				while (activePoints.Count > 0)
 				{
-					int set = 0;
-					int index = 0;
-					foreach (var neighbor in Tesselation.Surround(node.Point))
+					newActivePoints.Clear();
+
+					foreach (var v in activePoints)
 					{
-						var lookupShape = default(Shape<TNode, TPosition, TKey>);
+						skippedPoints.Remove(v);
+						inactivePoints.Add(v);
+						state.AddNodeToShape(shape, NodeFactory, v);
+
+						index = 0;
+						foreach (var vs in Tesselation.Surround(v))
+						{
+							testIndex = index++;
+							if (Tesselation.Valid(vs) && Tesselation.Tesselate(testIndex) && !(newActivePoints.Contains(vs) || inactivePoints.Contains(vs)))
+							{
+								if (KeyComparer.Equals(key, Tesselation.Key(vs)))
+								{
+									newActivePoints.Add(vs);
+								}
+								else
+								{
+									skippedPoints.Add(vs);
+								}
+							}
+						}
+					}
+					
+					activePoints.Clear();
+					foreach (var item in newActivePoints)
+					{
+						activePoints.Add(item);
+					}
+				}
+			}
+		}
+
+		private void SecondPass(State state)
+		{
+			int set = 0;
+			int index = 0;
+			var lookupShape = default(Shape<TNode, TPosition, TKey>);
+
+			var shape = default(Shape<TNode, TPosition, TKey>);
+			var node = default(TNode);
+			var tesselationSurroundEnumerable = default(IEnumerable<TPosition>);
+			var tesselationSurroundEnumerator = default(IEnumerator<TPosition>);
+			var neighbor = default(TPosition);
+
+			for (int shapeIndex = state.Shapes.Count - 1; shapeIndex >= 0; shapeIndex--)
+			{
+				shape = state.Shapes[shapeIndex];
+				for (int nodeIndex = shape.Nodes.Count - 1; nodeIndex >= 0; nodeIndex--)
+				{
+					set = 0;
+					index = 0;
+					node = shape.Nodes[nodeIndex];
+
+					tesselationSurroundEnumerable = Tesselation.Surround(node.Point);
+					tesselationSurroundEnumerator = tesselationSurroundEnumerable.GetEnumerator();
+					while (tesselationSurroundEnumerator.MoveNext())
+					{
+						neighbor = tesselationSurroundEnumerator.Current;
 						if (Tesselation.Valid(neighbor))
+						{
 							lookupShape = state.GetShape(neighbor);
+						}
 						else
+						{
 							lookupShape = null;
+						}
 						set *= 2;
 						if (lookupShape != shape)
+						{
 							set++;
+						}
 						node[index++] = lookupShape != null ? lookupShape.Area : null;
 					}
+					tesselationSurroundEnumerator.Dispose();
 
-					if (EdgeGenerator.OuterNode(set))
+					if (CollisionGenerator.OuterNode(set))
 					{
 						shape.AddOuterNode(node);
 					}
 				}
 			}
+		}
 
-			// Third Pass: Create Mesh/Edges per Area
+		private void ThirdPass(State state)
+		{
+			var meshTransform = default(IMeshTransform<TVertex>);
+			var colliderTransform = default(IColliderTransform<TCollision>);
 			foreach (var area in state.Areas)
 			{
-				var meshTransform = MeshTransformProvider.Get(area);
-				var colliderTransform = ColliderTransformProvider.Get(area);
-				foreach (var shape in state.ShapesByArea(area))
+				meshTransform = MeshTransformProvider.Get(area);
+				colliderTransform = ColliderTransformProvider.Get(area);
+				foreach (var shape in state.GetShapes(area))
 				{
 					shape.CreateMesh(VertexGenerator, meshTransform);
-					shape.CreateCollider(EdgeGenerator, colliderTransform);
+					shape.CreateCollider(CollisionGenerator, colliderTransform);
 				}
 				meshTransform.Finish();
 				colliderTransform.Finish();
@@ -118,15 +183,25 @@ namespace UnityTesselation
 
 		private class State
 		{
-			private Dictionary<TKey, Area<TKey>> areaCache = new Dictionary<TKey, Area<TKey>>();
+			private Dictionary<TKey, Area<TKey>> areaCache;
 			private List<Area<TKey>> areas = new List<Area<TKey>>();
-			private Dictionary<TPosition, TNode> positionNodeLookup = new Dictionary<TPosition, TNode>();
-			private Dictionary<TPosition, Shape<TNode, TPosition, TKey>> positionShapeLookup = new Dictionary<TPosition, Shape<TNode, TPosition, TKey>>();
+			private UnityTesselator<TCollision, TVertex, TNode, TPosition, TKey> parent;
+			private Dictionary<TPosition, Shape<TNode, TPosition, TKey>> positionShapeLookup;
+			private Dictionary<TKey, List<Shape<TNode, TPosition, TKey>>> shapeCache;
 			private List<Shape<TNode, TPosition, TKey>> shapes = new List<Shape<TNode, TPosition, TKey>>();
 
 			public List<Area<TKey>> Areas { get { return areas; } }
 
 			public List<Shape<TNode, TPosition, TKey>> Shapes { get { return shapes; } }
+
+			public State(UnityTesselator<TCollision, TVertex, TNode, TPosition, TKey> parent)
+			{
+				this.parent = parent;
+
+				areaCache = new Dictionary<TKey, Area<TKey>>(4, parent.KeyComparer);
+				shapeCache = new Dictionary<TKey, List<Shape<TNode, TPosition, TKey>>>(4, parent.KeyComparer);
+				positionShapeLookup = new Dictionary<TPosition, Shape<TNode, TPosition, TKey>>(32768, parent.PositionComparer);
+			}
 
 			public TNode AddNodeToShape(Shape<TNode, TPosition, TKey> shape, INodeFactory<TNode, TPosition, TKey> nodeFactory, TPosition position)
 			{
@@ -145,6 +220,7 @@ namespace UnityTesselation
 			{
 				var shape = new Shape<TNode, TPosition, TKey>(area);
 				shapes.Add(shape);
+				shapeCache[area.Key].Add(shape);
 				return shape;
 			}
 
@@ -152,61 +228,35 @@ namespace UnityTesselation
 			{
 				var area = default(Area<TKey>);
 				if (areaCache.TryGetValue(key, out area)) return area;
-				foreach (var item in Areas)
-				{
-					if (Equals(item.Key, key))
-					{
-						return areaCache[key] = item;
-					}
-				}
+
 				area = new Area<TKey>(key);
 				areas.Add(area);
+				areaCache[key] = area;
+				shapeCache[key] = new List<Shape<TNode, TPosition, TKey>>(1024);
 				return area;
 			}
 
 			public Shape<TNode, TPosition, TKey> GetShape(TPosition position)
 			{
 				var shape = default(Shape<TNode, TPosition, TKey>);
-				if (positionShapeLookup.TryGetValue(position, out shape)) return shape;
-				var count = shapes.Count;
-				for (int i = 0; i < count; i++)
-				{
-					shape = shapes[i];
-					var nodeCount = shape.Nodes.Count;
-					for (int j = 0; j < nodeCount; j++)
-					{
-						var node = shape.Nodes[j];
-						if (Equals(node.Point, position))
-						{
-							return positionShapeLookup[position] = shape;
-						}
-					}
-				}
+				if (positionShapeLookup.TryGetValue(position, out shape))
+					return shape;
+				Debug.Log("Shape not found. Returning null");
 				return null;
 			}
 
-			public IEnumerable<Shape<TNode, TPosition, TKey>> ShapesByArea(Area<TKey> area)
+			public List<Shape<TNode, TPosition, TKey>> GetShapes(TKey key)
 			{
-				var shapeCount = shapes.Count;
-				for (int i = 0; i < shapeCount; i++)
-				{
-					if (Equals(shapes[i].Area, area))
-					{
-						yield return shapes[i];
-					}
-				}
+				var shapeList = default(List<Shape<TNode, TPosition, TKey>>);
+				if (shapeCache.TryGetValue(key, out shapeList))
+					return shapeList;
+				Debug.Log("Key not found. Returning empty list");
+				return new List<Shape<TNode, TPosition, TKey>>();
 			}
 
-			public IEnumerable<Shape<TNode, TPosition, TKey>> ShapesByKey(TKey key)
+			public List<Shape<TNode, TPosition, TKey>> GetShapes(Area<TKey> area)
 			{
-				var shapeCount = shapes.Count;
-				for (int i = 0; i < shapeCount; i++)
-				{
-					if (Equals(shapes[i].Area.Key, key))
-					{
-						yield return shapes[i];
-					}
-				}
+				return GetShapes(area.Key);
 			}
 		}
 	}

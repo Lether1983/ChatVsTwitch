@@ -2,8 +2,8 @@
 
 namespace UnityTesselation.Contracts.Factories
 {
-	public interface IColliderTransformProvider<TPosition, TKey>
+	public interface IColliderTransformProvider<TCollision, TKey> where TCollision : ICollision
 	{
-		IColliderTransform<TPosition> Get(Area<TKey> area);
+		IColliderTransform<TCollision> Get(Area<TKey> area);
 	}
 }

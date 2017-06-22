@@ -4,7 +4,7 @@ using UnityTesselation.Contracts.Generators;
 
 namespace UnityTesselation.Defaults
 {
-	public abstract class Mesh2DTransform<TVertex> : MonoBehaviour, IMeshTransform<TVertex> where TVertex : IVector3Vertex
+	public abstract class Mesh3DTransform<TVertex> : MonoBehaviour, IMeshTransform<TVertex> where TVertex : IVector3Vertex
 	{
 		private List<int> indices = new List<int>();
 		[SerializeField]
@@ -45,12 +45,14 @@ namespace UnityTesselation.Defaults
 			mesh.SetVertices(vertices);
 			mesh.SetTriangles(indices, 0);
 			OnFinish(mesh);
+			mesh.RecalculateBounds();
+			mesh.RecalculateNormals();
 			mesh.UploadMeshData(true);
 			vertices.Clear();
 			indices.Clear();
 		}
 
-		protected abstract void OnConsume(TVertex[] quad);
+		protected abstract void OnConsume(TVertex[] block);
 
 		protected abstract void OnFinish(Mesh mesh);
 	}

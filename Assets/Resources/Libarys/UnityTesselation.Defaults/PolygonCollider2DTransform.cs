@@ -4,7 +4,7 @@ using UnityTesselation.Contracts.Generators;
 
 namespace UnityTesselation.Defaults
 {
-	public abstract class PolygonCollider2DTransform : MonoBehaviour, IColliderTransform<Vector2>
+	public abstract class PolygonCollider2DTransform : MonoBehaviour, IColliderTransform<Edge<Vector2>>
 	{
 		private List<Edge<Vector2>> edges = new List<Edge<Vector2>>();
 		[SerializeField]

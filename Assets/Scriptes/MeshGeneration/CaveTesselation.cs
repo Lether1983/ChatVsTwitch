@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityTesselation;
 using UnityTesselation.Contracts.Generators;
 
-public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, IEdgeGenerator<CaveNode, Vector2, int>, IVertexGenerator<CaveVertex, CaveNode, Vector2, int>
+public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, ICollisionGenerator<Edge<Vector2>,CaveNode,Vector2,int>, IVertexGenerator<CaveVertex, CaveNode, Vector2, int>
 {
     private static readonly Vector2[] surrounds = new[]
     {
@@ -114,7 +114,7 @@ public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, IEdgeG
         return gManager.levelMap.Get(point) & 3;
     }
 
-    bool IEdgeGenerator<CaveNode, Vector2, int>.OuterNode(int set)
+    bool ICollisionGenerator<Edge<Vector2>, CaveNode, Vector2, int>.OuterNode(int set)
     {
         return set > 0;
     }
