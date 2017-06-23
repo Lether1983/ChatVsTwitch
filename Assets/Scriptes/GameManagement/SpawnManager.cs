@@ -40,6 +40,7 @@ public class SpawnManager : MonoBehaviour
                     {
                         if (spawnObjects[i].Key == entity)
                         {
+                            if (spawnObjects[i].Name == "ExitPoint") continue;
                             if (spawnObjects[i].Prefab)
                             {
                                 Instantiate(spawnObjects[i].Prefab, new Vector2(x, y), Quaternion.identity).tManager = tManager;
@@ -71,8 +72,32 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnIncomeingFire(int x, int y)
     {
-        //TODO:
+        //TODO: Uncommend
         //Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
+    }
+
+    public void SpawnExitPoint(Map levelmap)
+    {
+        for (int x = 0; x < levelmap.MapWidth; x++)
+        {
+            for (int y = 0; y < levelmap.MapHeight; y++)
+            {
+                if ((levelmap.Get(x, y) & 4) > 0)
+                {
+                    var entity = levelmap.Get(x, y) >> 10;
+                    if (entity == 512)
+                    {
+                        foreach (var item in spawnObjects)
+                        {
+                            if(item.Name == "ExitPoint")
+                            {
+                                Instantiate(item.Prefab, new Vector2(x, y), Quaternion.identity).tManager = tManager;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -91,7 +116,10 @@ public struct SpawnObject
     {
         get { return prefab; }
     }
-
+    public string Name
+    {
+        get { return name; }
+    }
     public int Key
     {
         get { return key; }
