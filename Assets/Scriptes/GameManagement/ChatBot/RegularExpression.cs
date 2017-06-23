@@ -12,10 +12,15 @@ public class RegularExpression : MonoBehaviour
 
 
     Dictionary<char, int> myrow = new Dictionary<char, int>();
+    [SerializeField]
     GameManager gameManager;
+    [SerializeField]
+    SpawnManager sManager;
+
     void Start()
     {
         gameManager = this.gameObject.GetComponent<GameManager>();
+        sManager = this.gameObject.GetComponent<SpawnManager>();
         AddToDict();
     }
 
@@ -44,25 +49,26 @@ public class RegularExpression : MonoBehaviour
 
                     rowint = row.Value.ToUpper()[0] - 'A';
                     coloumint = int.Parse(coloum.Value);
-
-                    //TODO: ADD the Morter and Artillerie logic here
+                    //Spawn the Incoming Fire
+                    sManager.SpawnIncomeingFire(rowint, coloumint);
+                   ;
                 }
-                else
+            }
+            else
+            {
+                var vote = voteRegex.Match(gameManager.message);
+
+                if (vote.Value.ToLower() == gameManager.activeVote.Answer1)
                 {
-                    var vote = voteRegex.Match(gameManager.message);
-                    
-                    if (vote.Value.ToLower() == gameManager.activeVote.Answer1)
-                    {
-                        gameManager.activeVote.Answercount1++;
-                    }
-                    else if(vote.Value.ToLower() == gameManager.activeVote.Answer2)
-                    {
-                        gameManager.activeVote.Answercount2++;
-                    }
-                    else if (vote.Value.ToLower() == gameManager.activeVote.Answer3)
-                    {
-                        gameManager.activeVote.Answercount3++;
-                    }
+                    gameManager.activeVote.Answercount1++;
+                }
+                else if (vote.Value.ToLower() == gameManager.activeVote.Answer2)
+                {
+                    gameManager.activeVote.Answercount2++;
+                }
+                else if (vote.Value.ToLower() == gameManager.activeVote.Answer3)
+                {
+                    gameManager.activeVote.Answercount3++;
                 }
             }
         }

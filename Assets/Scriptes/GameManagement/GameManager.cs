@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour, IGameManager
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
 
+    public SpawnManager SManager { get; set; }
 
     private void Awake()
     {
@@ -64,13 +65,13 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         irc.sendPrivateWhisper("les-lee is a dick");
     }
-
+    
     public void JoinChat()
     {
         irc.joinRoom(ChannelName);
         joinedTheChat = true;
     }
-
+   
     void Update()
     {
         if (joinedTheChat)

@@ -76,9 +76,7 @@ public class IrcClient
 
     public void sendPrivateWhisper(string message)
     {
-        sendIrcMessage(":" + UserName + "!" + UserName + "@" + UserName +
-                ".tmi.twitch.tv PRIVMSG #" + channel + " : /w " + targetUser + " " + message);
+        sendIrcMessage(":" +UserName+"~"+UserName+"@"+UserName+
+                ".tmi.twitch.tv PRIVMSG #jtv : /w "+targetUser+" "+ message);
     }
-
-
 }

@@ -12,6 +12,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private GameObject Camera;
+    [SerializeField]
+    private GameObject MorterObject;
 
     private GameObject ActivePlayer;
 
@@ -67,7 +69,13 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+    public void SpawnIncomeingFire(int x, int y)
+    {
+        //TODO:
+        //Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
+    }
 }
+
 
 [Serializable]
 public struct SpawnObject
