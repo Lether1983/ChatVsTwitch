@@ -35,9 +35,15 @@ public class Map
         ActiveMap.Add(decorater);
     }
 
-    public void ModifyDecorater(IMapGenerator decorator)
+    public void ModifyDecorater(IMapGenerator decorator,int newCount)
     {
-        //TODO: Add Logic for Modify the Decoators
+        foreach (var item in ActiveMap)
+        {
+            if(item == decorator)
+            {
+                item.Modify(newCount);
+            }
+        }
     }
     public void ClearList()
     {

@@ -5,5 +5,5 @@ public interface IMapGenerator
 {
     void Setup(int width, int height,int[,] Randommap);
     int[,] Generate();
-    void Modify();
+    void Modify(int newValue);
 }

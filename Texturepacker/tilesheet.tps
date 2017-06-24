@@ -263,7 +263,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Users/Vincent/Desktop/smoke_grenade.png</key>
+            <key type="filename">smoke_grenade.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -295,7 +295,7 @@
             <filename>C:/Users/Vincent/Dropbox/Referenzen/boulder.png</filename>
             <filename>C:/Users/Vincent/Dropbox/Referenzen/Bush.png</filename>
             <filename>../../../../barracks-simulator/Source/GPD414_AP_VincentBendigs_BarracksSimulatorPrototyp/Assets/Resources/Sprites/Objects/tuer_normal_front.png</filename>
-            <filename>../../../../../Users/Vincent/Desktop/smoke_grenade.png</filename>
+            <filename>smoke_grenade.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

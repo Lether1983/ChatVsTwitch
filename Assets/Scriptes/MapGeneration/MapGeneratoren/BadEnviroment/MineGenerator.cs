@@ -45,8 +45,15 @@ public class MineGenerator : IMapGenerator
         }
     }
 
-    public void Modify()
+    public void Modify(int newValue)
     {
-        //TODO: Logic to Modify the Generator
+        if (newValue <= 20)
+        {
+            count = 20;
+        }
+        else
+        {
+            count = newValue;
+        }
     }
 }

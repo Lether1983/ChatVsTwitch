@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapScript : MonoBehaviour
+public class ExitpointScript : MonoBehaviour
 {
-    [SerializeField]
-    private int damage = 25;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<Player>().getDamage(damage);
-            Destroy(this.gameObject);
+            collision.gameObject.GetComponent<Player>().gmanager.ChangeToNextLevel();
         }
     }
 }

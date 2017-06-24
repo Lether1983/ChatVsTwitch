@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Entitys
 {
-    GameManager gmanager;
+    public GameManager gmanager;
     Weapon myWeapon;
     Armor myArmor;
     Uniform mySkin;

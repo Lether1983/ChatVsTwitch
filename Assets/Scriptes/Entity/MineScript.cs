@@ -8,7 +8,10 @@ public class MineScript : MonoBehaviour
     private int damage = 70;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Player>().getDamage(damage);
-        Destroy(this.gameObject);
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().getDamage(damage);
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour, IGameManager
 {
     public bool joinedTheChat;
     public string message;
+
+    
+
     public int Try = 0;
     public IrcClient irc;
     public VoteObject activeVote;
     public List<Enemy> EnemyList;
     public Player player;
-    public GameObject[,] map;
     public Map levelMap;
     public TextAsset tileSheet;
     public Container container;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour, IGameManager
     private CaveTesselator tesselator = null;
     [SerializeField]
     private SpawnManager sManager;
+    private Map currentMap;
 
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
@@ -37,6 +40,28 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         irc = new IrcClient("irc.twitch.tv", 6667, "missionagainstchatbot", "oauth:f4rfrtulipsiiqbdoaqdb2s7nhr2ou");
         levelMap = new Map();
+        FillTheFirstMap();
+
+        //TODO: SUCCESSFULL TRY NEED A SECOND OPINION
+        /*
+        var type = Type.GetType(activeVote.Classname);
+        levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
+        */
+        currentMap = levelMap;
+        GenerateLevel();
+      
+    }
+
+    private void GenerateLevel()
+    {
+        currentMap.CreateNewMap();
+        tesselator.Tesselate();
+        sManager.SpawnObjects(currentMap);
+        sManager.SpawnPlayer(currentMap);
+    }
+
+    private void FillTheFirstMap()
+    {
         levelMap.AddDecorater(new CaveGenerator());
         levelMap.AddDecorater(new DungeonGenerator());
         levelMap.AddDecorater(new SpawnpointGenerator());
@@ -44,17 +69,16 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
+    }
 
-        //TODO: SUCCESSFULL TRY NEED A SECOND OPINION
-        /*
-        var type = Type.GetType(activeVote.Classname);
-        levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
-        */
+    public void ModifyCurrentLevel()
+    {
 
-        levelMap.CreateNewMap();
-        tesselator.Tesselate();
-        sManager.SpawnObjects(levelMap);
-        sManager.SpawnPlayer(levelMap);
+    }
+
+    public void ChangeToNextLevel()
+    {
+        GenerateLevel();
     }
 
     public void SendMessages()
