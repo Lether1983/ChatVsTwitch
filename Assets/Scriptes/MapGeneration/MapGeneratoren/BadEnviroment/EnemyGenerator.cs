@@ -45,7 +45,7 @@ public class EnemyGenerator : IMapGenerator
         }
     }
 
-    public void Modify()
+    public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
     }

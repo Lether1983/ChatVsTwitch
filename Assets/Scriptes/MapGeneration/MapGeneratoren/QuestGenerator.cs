@@ -11,7 +11,7 @@ public class QuestGenerator : IMapGenerator
         return null;
     }
 
-    public void Modify()
+    public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
     }

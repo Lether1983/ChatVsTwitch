@@ -30,7 +30,7 @@ public class ExitpointGenerator : IMapGenerator
         }
     }
 
-    public void Modify()
+    public void Modify(int newValue)
     {
     }
 

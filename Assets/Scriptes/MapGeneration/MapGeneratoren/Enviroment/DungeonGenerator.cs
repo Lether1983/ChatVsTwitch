@@ -185,7 +185,7 @@ public class DungeonGenerator : IMapGenerator
         RandomMap = Randommap;
     }
 
-    public void Modify()
+    public void Modify(int newValue)
     {
     }
 }
