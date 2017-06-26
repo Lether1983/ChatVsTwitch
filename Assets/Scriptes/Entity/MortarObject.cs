@@ -6,25 +6,20 @@ public class MortarObject : MonoBehaviour
 {
     [SerializeField]
     float timer = 0.0f;
+    [SerializeField]
+    GameObject Player;
+    [SerializeField]
+    private bool isInArea;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            timer = 0;
+            Player = collision.gameObject;
+            isInArea = true;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("InTarget");
-        if (timer >= 5)
-        {
-            collision.gameObject.GetComponentInParent<Player>().getDamage(45);
-            Debug.Log(collision.gameObject.GetComponentInParent<Player>().Health);
-            Destroy(this.gameObject);
-        }
-    }
     private void Update()
     {
         if (timer <= 5)
@@ -33,7 +28,23 @@ public class MortarObject : MonoBehaviour
         }
         else
         {
-            timer = 0;
+            if (Player != null)
+            {
+                if (this.gameObject.GetComponent<Collider2D>().IsTouching(Player.GetComponentInChildren<Collider2D>()) && isInArea)
+                {
+                    Player.GetComponentInParent<Player>().getDamage(45);
+                    isInArea = false;
+                    Destroy(this.gameObject);
+                }
+            }
+            Destroy(this.gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isInArea = false;
         }
     }
 }
