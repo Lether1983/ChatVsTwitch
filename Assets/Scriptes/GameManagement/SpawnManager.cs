@@ -72,8 +72,7 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnIncomeingFire(int x, int y)
     {
-        //TODO: Uncommend
-        //Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
+        Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
     }
 
     public void SpawnExitPoint(Map levelmap)
