@@ -56,6 +56,9 @@ public class IrcClient
                 return string.Empty;
             case "PRIVMSG":
                 return filteredMessage.Substring(filteredMessage.IndexOf(':') + 1);
+            case "WHISPER":
+                Debug.Log("shht here");
+                return string.Empty;
             default:
                 Debug.LogWarningFormat("Unhandled Message Type {0}: {1}", messageType, filteredMessage);
                 return string.Empty;
