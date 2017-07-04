@@ -263,6 +263,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Blätterhaufen.png</key>
+            <key type="filename">dirt.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">fadenkreuz.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -310,6 +324,8 @@
             <filename>../../../../barracks-simulator/Source/GPD414_AP_VincentBendigs_BarracksSimulatorPrototyp/Assets/Resources/Sprites/Objects/tuer_normal_front.png</filename>
             <filename>smoke_grenade.png</filename>
             <filename>fadenkreuz.png</filename>
+            <filename>Blätterhaufen.png</filename>
+            <filename>dirt.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
