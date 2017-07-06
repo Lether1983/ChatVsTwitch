@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public string message;
 
     
-
+    
     public int Try = 0;
     public IrcClient irc;
     public VoteObject activeVote;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public Map levelMap;
     public TextAsset tileSheet;
     public Container container;
+    public bool CompletTarget;
 
     [SerializeField]
     private CaveTesselator tesselator = null;
@@ -49,7 +50,6 @@ public class GameManager : MonoBehaviour, IGameManager
         */
         currentMap = levelMap;
         GenerateLevel();
-      
     }
 
     private void GenerateLevel()
@@ -73,6 +73,16 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new TrapGenerator());
     }
 
+    public void DeleteTheCurrentMap()
+    {
+        GameObject[] Removal = GameObject.FindGameObjectsWithTag("Enviroment");
+        for (int i = 0; i < Removal.Length; i++)
+        {
+            Destroy(Removal[i]);
+        }
+        player.SavePlayerValueAndDestroy();
+    }
+
     public void ModifyCurrentLevel()
     {
 
@@ -87,6 +97,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         irc.sendPublicChatMessage("Kevin ist ein Penis");
     }
+
     public void SendWhisper()
     {
         irc.sendPrivateWhisper("les-lee is a dick");

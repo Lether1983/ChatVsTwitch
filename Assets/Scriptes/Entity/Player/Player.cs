@@ -26,6 +26,7 @@ public class Player : Entitys
         EntityDecorator.Add(new ArmorGenerator());
         EntityDecorator.Add(new UniformGenerator());
         CreateNewPlayer();
+        LoadPlayerValue();
         //Armorpoints = getArmorPoints();
     }
 
@@ -55,13 +56,26 @@ public class Player : Entitys
         }
     }
 
+    //TODO: ADD And MODIFY Decorator create
     public void AddDecorator()
     {
 
     }
+
     public void ModifyDecorator()
     {
 
+    }
+
+    public void SavePlayerValueAndDestroy()
+    {
+        gmanager.GetComponent<PlayerValueHolder>().Lifes = lifes;
+        Destroy(this.gameObject);
+    }
+
+    private void LoadPlayerValue()
+    {
+        lifes = gmanager.GetComponent<PlayerValueHolder>().Lifes;
     }
 
     public void CreateNewPlayer()

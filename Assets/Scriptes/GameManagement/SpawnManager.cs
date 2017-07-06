@@ -14,6 +14,10 @@ public class SpawnManager : MonoBehaviour
     private GameObject Camera;
     [SerializeField]
     private GameObject MorterObject;
+    [SerializeField]
+    private GameObject placeholderPrefab;
+    [SerializeField]
+    private SpawnObject[] spawnObjects = null;
 
     private GameObject ActivePlayer;
 
@@ -22,12 +26,10 @@ public class SpawnManager : MonoBehaviour
         get { return ActivePlayer; }
     }
 
-
-    [SerializeField]
-    private SpawnObject[] spawnObjects = null;
-
     public void SpawnObjects(Map levelMap)
     {
+        GameObject temp2 = Instantiate(placeholderPrefab, this.transform.position, Quaternion.identity) as GameObject;
+        temp2.transform.SetParent(this.gameObject.transform);
         for (int x = 0; x < levelMap.MapWidth; x++)
         {
             for (int y = 0; y < levelMap.MapHeight; y++)
@@ -43,7 +45,9 @@ public class SpawnManager : MonoBehaviour
                             if (spawnObjects[i].Name == "ExitPoint") continue;
                             if (spawnObjects[i].Prefab)
                             {
-                                Instantiate(spawnObjects[i].Prefab, new Vector2(x, y), Quaternion.identity).tManager = tManager;
+                                SpriteGetter Temp =Instantiate(spawnObjects[i].Prefab, new Vector2(x, y), Quaternion.identity);
+                                Temp.tManager = tManager;
+                                Temp.gameObject.transform.SetParent(temp2.transform);
                             }
                             break;
                         }
@@ -52,6 +56,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+
     public void SpawnPlayer(Map levelmap)
     {
         for (int x = 0; x < levelmap.MapWidth; x++)
@@ -70,6 +75,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+
     public void SpawnIncomeingFire(int x, int y)
     {
         Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);

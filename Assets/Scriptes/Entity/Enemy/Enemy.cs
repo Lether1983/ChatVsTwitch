@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : Entitys
 {
+    [SerializeField]
     private int health = 100;
     Weapon myWeapon;
     Armor myArmor;
@@ -17,6 +18,7 @@ public class Enemy : Entitys
         EntityDecorator.Add(new UniformGenerator());
         CreateNewEnemy();
     }
+    public int Health { get { return health; } set { health = value; } }
     public void AddDecorator()
     {
 
