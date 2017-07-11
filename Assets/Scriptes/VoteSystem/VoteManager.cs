@@ -8,10 +8,46 @@ public class VoteManager : MonoBehaviour
 {
     public GameManager gmanager;
     public Dictionary<int, List<VoteObject>> LevelVotePlaner;
-
+    List<VoteObject> ActiveLevel;
     Dictionary<int, string> deciderDict;
-    
-    
+    bool VoteDone;
+    bool GameStart = false;
+    int count;
+    float VoteActiveTime;
+    private float Timer;
+
+    public void LevelStart(int Levelcount)
+    {
+        GetLevelList(Levelcount);
+        StartVoteSystem();
+    }
+
+    private void StartVoteSystem()
+    {
+        count = 0;
+        gmanager.activeVote = ActiveLevel[count];
+        count++;
+        GameStart = true;
+    }
+
+    private void GetLevelList(int Levelcount)
+    {
+        ActiveLevel = LevelVotePlaner[Levelcount];
+    }
+    private void Update()
+    {
+        if (GameStart)
+        {
+            Timer = Time.deltaTime;
+
+            if (Timer >= VoteActiveTime)
+            {
+                Timer = 0;
+                gmanager.activeVote = ActiveLevel[count];
+                count++;
+            }
+        }
+    }
     //TODO: ADD some Functions to the VoteManager
     public void decideTheVoteResult()
     {
@@ -41,22 +77,22 @@ public class VoteManager : MonoBehaviour
             {
                 //Change the Standard Value - The Change Value
             }
-            else if(item == "yes")
+            else if (item == "yes")
             {
-                
+
             }
-            else if(item == "no")
+            else if (item == "no")
             {
                 //nothing happend
             }
-            
+
         }
         else if (gmanager.activeVote is EnviromentVoteObject)
         {
             if (item == "more")
             {
                 //Change the Standard Value + The Change Value
-                if(gmanager.activeVote.name == "AirStrikeVote")
+                if (gmanager.activeVote.name == "AirStrikeVote")
                 {
                     //send more as one Airstrike
                 }
@@ -81,7 +117,7 @@ public class VoteManager : MonoBehaviour
             {
                 // Send fake Packet
             }
-            else if(item == "enemy")
+            else if (item == "enemy")
             {
                 //SpawnEnemys not Rebels
             }
@@ -100,7 +136,7 @@ public class VoteManager : MonoBehaviour
             {
                 //Without Trees
             }
-            
+
         }
 
         gmanager.activeVote.Answercount1 = 0;

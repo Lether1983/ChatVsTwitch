@@ -20,12 +20,17 @@ public class GameManager : MonoBehaviour, IGameManager
     public TextAsset tileSheet;
     public Container container;
     public bool CompletTarget;
+    public bool VoteDone;
 
     [SerializeField]
     private CaveTesselator tesselator = null;
     [SerializeField]
     private SpawnManager sManager;
+    [SerializeField]
+    private VoteManager vManager;
+    [SerializeField]
     private Map currentMap;
+    private int activeVoteCount;
 
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour, IGameManager
         */
         currentMap = levelMap;
         GenerateLevel();
+
     }
 
     private void GenerateLevel()
