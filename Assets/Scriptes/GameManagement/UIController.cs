@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,18 @@ public class UIController : MonoBehaviour
     private Text MissionCount;
     [SerializeField]
     private Text LifeCount;
+    [SerializeField]
+    private GameObject VotePanel;
+    private VoteObject ActiveVoteObject;
+
+    public VoteObject activeVoteObject
+    {
+        get { return ActiveVoteObject; }
+        set { ActiveVoteObject = value; }
+    }
+
+
+    private GameObject ActiveVote;
 
     private void Update()
     {
@@ -37,13 +50,15 @@ public class UIController : MonoBehaviour
         }
     }
 
-
-
-
-
-
     public void ActivateVote()
     {
+        ActiveVote = Instantiate(VoteShowObject, new Vector3(0, 0), Quaternion.identity) as GameObject;
+        ActiveVote.transform.SetParent(VotePanel.transform);
+    }
 
+    internal void resetVoteUi()
+    {
+        Destroy(ActiveVote);
+             
     }
 }

@@ -26,6 +26,7 @@ public class VoteManager : MonoBehaviour
     {
         count = 0;
         gmanager.activeVote = ActiveLevel[count];
+        gmanager.setVoteUI();
         count++;
         GameStart = true;
     }
@@ -42,6 +43,8 @@ public class VoteManager : MonoBehaviour
 
             if (Timer >= VoteActiveTime)
             {
+                decideTheVoteResult();
+                gmanager.resetVoteUi();
                 Timer = 0;
                 gmanager.activeVote = ActiveLevel[count];
                 count++;

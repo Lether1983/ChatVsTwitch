@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField]
     private VoteManager vManager;
     [SerializeField]
+    private UIController UIController;
+    [SerializeField]
     private Map currentMap;
     private int activeVoteCount;
 
@@ -40,6 +42,18 @@ public class GameManager : MonoBehaviour, IGameManager
     private void Awake()
     {
         container = JsonUtility.FromJson<Container>(tileSheet.text);
+    }
+
+    internal void setVoteUI()
+    {
+        UIController.activeVoteObject = activeVote;
+        UIController.ActivateVote();
+    }
+
+    internal void resetVoteUi()
+    {
+        UIController.activeVoteObject = activeVote;
+        UIController.resetVoteUi();
     }
 
     void Start()
