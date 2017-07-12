@@ -11,7 +11,7 @@ public class TrapScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<Player>().getDamage(damage);
+            collision.GetComponentInParent<Player>().getDamage(damage);
             Destroy(this.gameObject);
         }
     }

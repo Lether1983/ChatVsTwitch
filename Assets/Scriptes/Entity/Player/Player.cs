@@ -54,6 +54,7 @@ public class Player : Entitys
         {
             lifes--;
         }
+        Debug.Log(Health);
     }
 
     //TODO: ADD And MODIFY Decorator create

@@ -10,7 +10,7 @@ public class MineScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().getDamage(damage);
+            collision.gameObject.GetComponentInParent<Player>().getDamage(damage);
             Destroy(this.gameObject);
         }
     }
