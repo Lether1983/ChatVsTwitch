@@ -61,14 +61,17 @@ public class RegularExpression : MonoBehaviour
                 if (vote.Value.ToLower() == gameManager.activeVote.Answer1)
                 {
                     gameManager.activeVote.Answercount1++;
+                    gameManager.activeVote.Totalcount++;
                 }
                 else if (vote.Value.ToLower() == gameManager.activeVote.Answer2)
                 {
                     gameManager.activeVote.Answercount2++;
+                    gameManager.activeVote.Totalcount++;
                 }
                 else if (vote.Value.ToLower() == gameManager.activeVote.Answer3)
                 {
                     gameManager.activeVote.Answercount3++;
+                    gameManager.activeVote.Totalcount++;
                 }
             }
         }

@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour, IGameManager
     public bool joinedTheChat;
     public string message;
 
-    
-    
     public int Try = 0;
     public IrcClient irc;
     public VoteObject activeVote;

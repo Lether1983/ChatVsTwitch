@@ -13,6 +13,7 @@ public class VoteManager : MonoBehaviour
     bool VoteDone;
     bool GameStart = false;
     int count;
+    [SerializeField]
     float VoteActiveTime;
     private float Timer;
 
@@ -39,7 +40,7 @@ public class VoteManager : MonoBehaviour
     {
         if (GameStart)
         {
-            Timer = Time.deltaTime;
+            Timer += Time.deltaTime;
 
             if (Timer >= VoteActiveTime)
             {
