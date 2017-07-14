@@ -8,6 +8,7 @@ public class VoteManager : MonoBehaviour
 {
     public GameManager gmanager;
     public Dictionary<int, List<VoteObject>> LevelVotePlaner;
+    public List<LevelObject> LevelList;
     List<VoteObject> ActiveLevel;
     Dictionary<int, string> deciderDict;
     bool VoteDone;
@@ -16,6 +17,15 @@ public class VoteManager : MonoBehaviour
     [SerializeField]
     float VoteActiveTime;
     private float Timer;
+
+    public void GameBegin()
+    {
+        for (int i = 0; i < LevelList.Count; i++)
+        {
+            LevelVotePlaner.Add(LevelList[i].Levelcount, LevelList[i].VoteInLevel);
+        }
+        LevelStart(1);
+    }
 
     public void LevelStart(int Levelcount)
     {
@@ -52,7 +62,7 @@ public class VoteManager : MonoBehaviour
             }
         }
     }
-    //TODO: ADD some Functions to the VoteManager
+
     public void decideTheVoteResult()
     {
         deciderDict = new Dictionary<int, string>();
@@ -73,22 +83,16 @@ public class VoteManager : MonoBehaviour
             {
                 //Change the Standard Value + The Change Value
             }
-            else if (item == "normal")
-            {
-                //Nothing happend
-            }
+            else if (item == "normal"){/*Nothing happend*/}
             else if (item == "light")
             {
                 //Change the Standard Value - The Change Value
             }
             else if (item == "yes")
             {
-
+                //gmanager.player.AddDecorator()
             }
-            else if (item == "no")
-            {
-                //nothing happend
-            }
+            else if (item == "no"){/*nothing happend*/}
 
         }
         else if (gmanager.activeVote is EnviromentVoteObject)
@@ -101,10 +105,7 @@ public class VoteManager : MonoBehaviour
                     //send more as one Airstrike
                 }
             }
-            else if (item == "equal")
-            {
-                //Nothing happend
-            }
+            else if (item == "equal") {/*Nothing happend*/}
             else if (item == "less")
             {
                 //Change the Standard Value - The Change Value
@@ -113,10 +114,7 @@ public class VoteManager : MonoBehaviour
             {
                 //gmanager.levelMap.AddDecorater()
             }
-            else if (item == "no")
-            {
-                //nothing happend
-            }
+            else if (item == "no"){/*nothing happend*/}
             else if (item == "fake")
             {
                 // Send fake Packet
@@ -128,19 +126,27 @@ public class VoteManager : MonoBehaviour
         }
         else if (gmanager.activeVote is BiomVoteObject)
         {
-            if (item == "forest" || item == "jungle")
-            {
-                // Standard Generation with all Generators
-            }
+            if (item == "forest" || item == "jungle"){ /*Change Nothing*/ }
             else if (item == "snow" || item == "swamp")
             {
-                // Without Stones
+                foreach (var  Generator in gmanager.levelMap.ActiveMap)
+                {
+                    if(Generator == typeof(StoneGenerator))
+                    {
+                        gmanager.levelMap.RemoveDecorater(Generator);
+                    }
+                }
             }
             else if (item == "sand" || item == "ruins")
             {
-                //Without Trees
+                foreach (var Generator in gmanager.levelMap.ActiveMap)
+                {
+                    if (Generator == typeof(TreeGenerator))
+                    {
+                        gmanager.levelMap.RemoveDecorater(Generator);
+                    }
+                }
             }
-
         }
 
         gmanager.activeVote.Answercount1 = 0;

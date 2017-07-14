@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BiomVoteObject : VoteObject
 {
-    //TODO: Add logic here for the BiomVote
+    //<<<<<<<<<<<<TODO: Add logic here for the BiomVote
 }

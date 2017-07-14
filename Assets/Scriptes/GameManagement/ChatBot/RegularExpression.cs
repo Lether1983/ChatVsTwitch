@@ -51,7 +51,6 @@ public class RegularExpression : MonoBehaviour
                     coloumint = int.Parse(coloum.Value);
                     //Spawn the Incoming Fire
                     sManager.SpawnIncomeingFire(rowint, coloumint);
-                   ;
                 }
             }
             else

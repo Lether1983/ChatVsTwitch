@@ -9,7 +9,7 @@ public class Map
     public int MapHeight;
     public int[,] RandomMap;
 
-    List<IMapGenerator> ActiveMap;
+    public List<IMapGenerator> ActiveMap;
     IMapGenerator MapGenerator;
     
     public Map()
@@ -33,6 +33,11 @@ public class Map
     public void AddDecorater(IMapGenerator decorater)
     {
         ActiveMap.Add(decorater);
+    }
+
+    public void RemoveDecorater(IMapGenerator decorater)
+    {
+        ActiveMap.Remove(decorater);
     }
 
     public void ModifyDecorater(IMapGenerator decorator,int newCount)
