@@ -8,4 +8,5 @@ public class Weapon : Equipment
     public int Damage;
     public int MaxAmmo;
     public int currentClip;
+    public Armor LightArmor;
 }
