@@ -8,7 +8,7 @@ public class MineGenerator : IMapGenerator
     int Mapheight;
     int[,] RandomMap;
     int count;
-
+    string Name = "MineGenerator";
     public int[,] Generate()
     {
         SpawnMines();
@@ -55,5 +55,10 @@ public class MineGenerator : IMapGenerator
         {
             count = newValue;
         }
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

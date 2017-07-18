@@ -9,6 +9,7 @@ public class BushGenerator : IMapGenerator
     int Mapheight;
     int count;
     int[,] RandomMap;
+    string Name = "BushGenerator";
 
     public int[,] Generate()
     {
@@ -36,7 +37,7 @@ public class BushGenerator : IMapGenerator
             }
             else
             {
-                RandomMap[tempX, tempY] = 1+4+16384;
+                RandomMap[tempX, tempY] = 1 + 4 + 16384;
             }
         }
     }
@@ -44,5 +45,10 @@ public class BushGenerator : IMapGenerator
     public void Modify(int count)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

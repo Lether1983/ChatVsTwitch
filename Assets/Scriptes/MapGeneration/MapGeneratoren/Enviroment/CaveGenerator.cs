@@ -7,7 +7,7 @@ public class CaveGenerator : IMapGenerator
     private int MapWidth;
     private int MapHeight;
     public int[,] RandomMap;
-
+    string Name = "CaveGenerator";
 
     private int PercentareWalls = 40;
 
@@ -159,5 +159,10 @@ public class CaveGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

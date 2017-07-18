@@ -9,6 +9,7 @@ public class TreeGenerator : IMapGenerator
     int Mapheight;
     int count;
     int[,] RandomMap;
+    string Name = "TreeGenerator";
 
     public int[,] Generate()
     {
@@ -48,5 +49,10 @@ public class TreeGenerator : IMapGenerator
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

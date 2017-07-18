@@ -8,7 +8,7 @@ public class TargetGenerator : IMapGenerator
     int MapHeight;
     int count;
     int[,] RandomMap;
-
+    string Name = "TargetGenerator";
 
     public int[,] Generate()
     {
@@ -45,5 +45,10 @@ public class TargetGenerator : IMapGenerator
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

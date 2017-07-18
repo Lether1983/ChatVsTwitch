@@ -9,7 +9,7 @@ public class StoneGenerator : IMapGenerator
     int Mapheight;
     int count;
     int[,] RandomMap;
-
+    string Name = "StoneGenerator";
     public int[,] Generate()
     {
         SpawnStonesOnMap();
@@ -46,5 +46,10 @@ public class StoneGenerator : IMapGenerator
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

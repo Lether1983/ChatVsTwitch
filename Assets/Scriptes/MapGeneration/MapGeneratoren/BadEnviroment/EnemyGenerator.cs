@@ -8,7 +8,7 @@ public class EnemyGenerator : IMapGenerator
     int Mapheight;
     int[,] RandomMap;
     int count;
-
+    string Name = "EnemyGenerator";
     public int[,] Generate()
     {
         SpawnEnemys();
@@ -48,5 +48,10 @@ public class EnemyGenerator : IMapGenerator
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

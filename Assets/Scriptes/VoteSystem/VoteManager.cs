@@ -12,6 +12,8 @@ public class VoteManager : MonoBehaviour
     List<VoteObject> ActiveLevel;
     Dictionary<int, string> deciderDict;
     bool VoteDone;
+    [SerializeField]
+    int changeValue;
     bool GameStart = false;
     int count;
     [SerializeField]
@@ -100,6 +102,7 @@ public class VoteManager : MonoBehaviour
             if (item == "more")
             {
                 //Change the Standard Value + The Change Value
+                gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname,changeValue);
                 if (gmanager.activeVote.name == "AirStrikeVote")
                 {
                     //send more as one Airstrike
@@ -109,6 +112,7 @@ public class VoteManager : MonoBehaviour
             else if (item == "less")
             {
                 //Change the Standard Value - The Change Value
+                gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname, -changeValue);
             }
             else if (item == "yes")
             {

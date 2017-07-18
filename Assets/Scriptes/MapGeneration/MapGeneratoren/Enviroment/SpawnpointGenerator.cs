@@ -8,7 +8,7 @@ public class SpawnpointGenerator : IMapGenerator
     private int width;
     private int height;
     private int[,] Randommap;
-
+    string Name = "SpawnpointGenerator";
     public int[,] Generate()
     {
         PlaceSpawnpoint();
@@ -40,5 +40,10 @@ public class SpawnpointGenerator : IMapGenerator
         this.width = width;
         this.height = height;
         this.Randommap = Randommap;
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

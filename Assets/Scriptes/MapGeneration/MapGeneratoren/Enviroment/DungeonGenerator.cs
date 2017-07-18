@@ -7,6 +7,7 @@ public class DungeonGenerator : IMapGenerator
     public int MapWidth;
     public int MapHeight;
     public int[,] RandomMap;
+    string Name = "DungeonGenerator";
 
     public int[,] Generate()
     {
@@ -187,5 +188,10 @@ public class DungeonGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

@@ -40,11 +40,11 @@ public class Map
         ActiveMap.Remove(decorater);
     }
 
-    public void ModifyDecorater(IMapGenerator decorator,int newCount)
+    public void ModifyDecorater(string decorator,int newCount)
     {
         foreach (var item in ActiveMap)
         {
-            if(item == decorator)
+            if(item.GetName() == decorator)
             {
                 item.Modify(newCount);
             }

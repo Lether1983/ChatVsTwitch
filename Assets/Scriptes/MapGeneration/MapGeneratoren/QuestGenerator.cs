@@ -11,6 +11,11 @@ public class QuestGenerator : IMapGenerator
         return null;
     }
 
+    public string GetName()
+    {
+        return "";
+    }
+
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator

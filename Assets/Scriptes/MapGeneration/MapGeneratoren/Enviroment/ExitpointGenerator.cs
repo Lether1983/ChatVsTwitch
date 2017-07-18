@@ -8,7 +8,7 @@ public class ExitpointGenerator : IMapGenerator
     private int width;
     private int height;
     private int[,] Randommap;
-
+    string Name = "ExitpointGenerator";
     public int[,] Generate()
     {
         PlaceExitPoint();
@@ -39,5 +39,10 @@ public class ExitpointGenerator : IMapGenerator
         this.width = width;
         this.height = height;
         this.Randommap = Randommap;
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }

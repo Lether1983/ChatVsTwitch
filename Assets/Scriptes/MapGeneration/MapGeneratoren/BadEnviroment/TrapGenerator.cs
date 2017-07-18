@@ -8,7 +8,7 @@ public class TrapGenerator : IMapGenerator
     int Mapheight;
     int count;
     int[,] RandomMap;
-
+    string Name = "TrapGenerator";
     public int[,] Generate()
     {
         SpawnTrapsOnMap();
@@ -47,5 +47,10 @@ public class TrapGenerator : IMapGenerator
     public void Modify(int newValue)
     {
         //TODO: Logic to Modify the Generator
+    }
+
+    public string GetName()
+    {
+        return Name;
     }
 }
