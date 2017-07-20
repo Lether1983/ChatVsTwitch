@@ -44,7 +44,15 @@ public class TargetGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
-        //TODO: Logic to Modify the Generator
+        count += newValue;
+        if (count <= 1)
+        {
+            count = 1;
+        }
+        else if (count >= 3)
+        {
+            count = 3;
+        }
     }
 
     public string GetName()

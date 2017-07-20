@@ -44,7 +44,6 @@ public class BushGenerator : IMapGenerator
 
     public void Modify(int count)
     {
-        //TODO: Logic to Modify the Generator
     }
 
     public string GetName()
