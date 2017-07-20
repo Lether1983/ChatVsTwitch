@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour, IGameManager
         */
         currentMap = levelMap;
         GenerateLevel();
+        vManager.GameBegin();
 
     }
 

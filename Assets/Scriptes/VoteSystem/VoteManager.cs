@@ -9,6 +9,7 @@ public class VoteManager : MonoBehaviour
     public GameManager gmanager;
     public Dictionary<int, List<VoteObject>> LevelVotePlaner;
     public List<LevelObject> LevelList;
+    [SerializeField]
     List<VoteObject> ActiveLevel;
     Dictionary<int, string> deciderDict;
     bool VoteDone;
@@ -22,6 +23,8 @@ public class VoteManager : MonoBehaviour
 
     public void GameBegin()
     {
+        LevelVotePlaner = new Dictionary<int, List<VoteObject>>();
+        deciderDict = new Dictionary<int, string>();
         for (int i = 0; i < LevelList.Count; i++)
         {
             LevelVotePlaner.Add(LevelList[i].Levelcount, LevelList[i].VoteInLevel);
@@ -41,25 +44,36 @@ public class VoteManager : MonoBehaviour
         gmanager.activeVote = ActiveLevel[count];
         gmanager.setVoteUI();
         count++;
+        Debug.Log(LevelVotePlaner.Keys);
         GameStart = true;
     }
 
     private void GetLevelList(int Levelcount)
     {
-        ActiveLevel = LevelVotePlaner[Levelcount];
+        foreach (var item in LevelVotePlaner)
+        {
+            if (item.Key == Levelcount)
+            {
+                ActiveLevel = LevelVotePlaner[item.Key];
+            }
+        }
     }
     private void Update()
     {
         if (GameStart)
         {
             Timer += Time.deltaTime;
-
-            if (Timer >= VoteActiveTime)
+            Debug.Log(LevelVotePlaner.Keys);
+            if (Timer >= VoteActiveTime - 1)
             {
                 decideTheVoteResult();
                 gmanager.resetVoteUi();
                 Timer = 0;
-                gmanager.activeVote = ActiveLevel[count];
+                if (count < ActiveLevel.Count)
+                {
+                    gmanager.activeVote = ActiveLevel[count];
+                }
+                gmanager.setVoteUI();
                 count++;
             }
         }
@@ -67,16 +81,20 @@ public class VoteManager : MonoBehaviour
 
     public void decideTheVoteResult()
     {
-        deciderDict = new Dictionary<int, string>();
-
+        deciderDict.Clear();
         deciderDict.Add(gmanager.activeVote.Answercount1, gmanager.activeVote.Answer1);
-        deciderDict.Add(gmanager.activeVote.Answercount2, gmanager.activeVote.Answer2);
-        deciderDict.Add(gmanager.activeVote.Answercount3, gmanager.activeVote.Answer3);
-
+        if (gmanager.activeVote.Answercount2 != gmanager.activeVote.Answercount1)
+        {
+            deciderDict.Add(gmanager.activeVote.Answercount2, gmanager.activeVote.Answer2);
+        }
+        if (gmanager.activeVote.Answercount3 != gmanager.activeVote.Answercount1 && gmanager.activeVote.Answercount3 != gmanager.activeVote.Answercount2)
+        {
+            deciderDict.Add(gmanager.activeVote.Answercount3, gmanager.activeVote.Answer3);
+        }
         var list = deciderDict.Keys.ToList();
         list.Sort();
-        Debug.Log(list[2]);
-        var item = deciderDict[list[2]];
+        Debug.Log(list[list.Count - 1]);
+        var item = deciderDict[list[list.Count - 1]];
         Debug.Log(item);
         //TODO: Add the Logic for the Standard VoteObjects
         if (gmanager.activeVote is CharakterVoteObject)
@@ -85,7 +103,7 @@ public class VoteManager : MonoBehaviour
             {
                 //Change the Standard Value + The Change Value
             }
-            else if (item == "normal"){/*Nothing happend*/}
+            else if (item == "normal") {/*Nothing happend*/}
             else if (item == "light")
             {
                 //Change the Standard Value - The Change Value
@@ -94,7 +112,7 @@ public class VoteManager : MonoBehaviour
             {
                 //gmanager.player.AddDecorator()
             }
-            else if (item == "no"){/*nothing happend*/}
+            else if (item == "no") {/*nothing happend*/}
 
         }
         else if (gmanager.activeVote is EnviromentVoteObject)
@@ -102,7 +120,7 @@ public class VoteManager : MonoBehaviour
             if (item == "more")
             {
                 //Change the Standard Value + The Change Value
-                gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname,changeValue);
+                gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname, changeValue);
                 if (gmanager.activeVote.name == "AirStrikeVote")
                 {
                     //send more as one Airstrike
@@ -118,7 +136,7 @@ public class VoteManager : MonoBehaviour
             {
                 //gmanager.levelMap.AddDecorater()
             }
-            else if (item == "no"){/*nothing happend*/}
+            else if (item == "no") {/*nothing happend*/}
             else if (item == "fake")
             {
                 // Send fake Packet
@@ -130,12 +148,12 @@ public class VoteManager : MonoBehaviour
         }
         else if (gmanager.activeVote is BiomVoteObject)
         {
-            if (item == "forest" || item == "jungle"){ /*Change Nothing*/ }
+            if (item == "forest" || item == "jungle") { /*Change Nothing*/ }
             else if (item == "snow" || item == "swamp")
             {
-                foreach (var  Generator in gmanager.levelMap.ActiveMap)
+                foreach (var Generator in gmanager.levelMap.ActiveMap)
                 {
-                    if(Generator == typeof(StoneGenerator))
+                    if (Generator == typeof(StoneGenerator))
                     {
                         gmanager.levelMap.RemoveDecorater(Generator);
                     }
@@ -152,7 +170,6 @@ public class VoteManager : MonoBehaviour
                 }
             }
         }
-
         gmanager.activeVote.Answercount1 = 0;
         gmanager.activeVote.Answercount2 = 0;
         gmanager.activeVote.Answercount3 = 0;

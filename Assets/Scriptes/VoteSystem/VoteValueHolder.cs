@@ -50,7 +50,7 @@ public class VoteValueHolder : MonoBehaviour
         set { question = value; }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         timer += Time.deltaTime;
         if (timer <= ActiveVoteTime)
