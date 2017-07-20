@@ -47,13 +47,14 @@ public class MineGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
-        if (newValue <= 20)
+        count += newValue;
+        if (count <= 20)
         {
             count = 20;
         }
-        else
+        else if(count >= 50)
         {
-            count = newValue;
+            count = 50;
         }
     }
 

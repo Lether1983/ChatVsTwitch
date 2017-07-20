@@ -45,7 +45,6 @@ public class StoneGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
-        //TODO: Logic to Modify the Generator
     }
 
     public string GetName()

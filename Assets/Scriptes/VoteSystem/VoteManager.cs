@@ -119,8 +119,12 @@ public class VoteManager : MonoBehaviour
         {
             if (item == "more")
             {
+<<<<<<< HEAD
                 //Change the Standard Value + The Change Value
                 gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname, changeValue);
+=======
+                gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname,changeValue);
+>>>>>>> a9cae5f7a9534aed8b512fcac9bd8994f74d4470
                 if (gmanager.activeVote.name == "AirStrikeVote")
                 {
                     //send more as one Airstrike
@@ -129,7 +133,6 @@ public class VoteManager : MonoBehaviour
             else if (item == "equal") {/*Nothing happend*/}
             else if (item == "less")
             {
-                //Change the Standard Value - The Change Value
                 gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname, -changeValue);
             }
             else if (item == "yes")

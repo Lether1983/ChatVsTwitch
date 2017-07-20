@@ -32,7 +32,6 @@ public class SpawnpointGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
-        //TODO: Logic to Modify the Generator
     }
 
     public void Setup(int width, int height, int[,] Randommap)

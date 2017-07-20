@@ -47,8 +47,17 @@ public class EnemyGenerator : IMapGenerator
 
     public void Modify(int newValue)
     {
-        //TODO: Logic to Modify the Generator
+        count += newValue;
+        if(count <= 20)
+        {
+            count = 20;
+        }
+        else if(count >= 50)
+        {
+            count = 50;
+        }
     }
+
 
     public string GetName()
     {
