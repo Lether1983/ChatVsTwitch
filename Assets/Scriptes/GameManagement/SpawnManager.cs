@@ -18,8 +18,10 @@ public class SpawnManager : MonoBehaviour
     private GameObject placeholderPrefab;
     [SerializeField]
     private SpawnObject[] spawnObjects = null;
-
+    [SerializeField]
     private GameObject ActivePlayer;
+
+    private Vector2 Startposition;
 
     public GameObject GetPlayer
     {
@@ -57,6 +59,11 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void RestartPlayerPosition()
+    {
+        ActivePlayer = Instantiate(Player, Startposition, Quaternion.identity) as GameObject;
+    }
+
     public void SpawnPlayer(Map levelmap)
     {
         for (int x = 0; x < levelmap.MapWidth; x++)
@@ -68,7 +75,8 @@ public class SpawnManager : MonoBehaviour
                     var entity = levelmap.Get(x, y) >> 10;
                     if (entity == 256)
                     {
-                        ActivePlayer = Instantiate(Player, new Vector2(x, y), Quaternion.identity) as GameObject;
+                        Startposition = new Vector2(x, y);
+                        ActivePlayer = Instantiate(Player, Startposition, Quaternion.identity) as GameObject;
                         Instantiate(Camera, new Vector3(x, y,-10), Quaternion.identity);
                     }
                 }

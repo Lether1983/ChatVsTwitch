@@ -5,17 +5,18 @@ using System.Collections.Generic;
 public class FireWeapon : MonoBehaviour
 {
     public GameObject SpritePrefab;
-    public List<GameObject> BulletPool;
+
+    private GameManager gManager;
 
     void Start()
     {
-        BulletPool = new List<GameObject>();
-
+        gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gManager.BulletPool.Clear();
         for (int i = 0; i < 20; i++)
         {
             GameObject Temp = Instantiate(SpritePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             Temp.SetActive(false);
-            BulletPool.Add(Temp);
+            gManager.BulletPool.Add(Temp);
         }
     }
 
@@ -23,14 +24,14 @@ public class FireWeapon : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            for (int i = 0; i < BulletPool.Count; i++)
+            for (int i = 0; i < gManager.BulletPool.Count; i++)
             {
-                if (!BulletPool[i].activeInHierarchy)
+                if (!gManager.BulletPool[i].activeInHierarchy)
                 {
-                    BulletPool[i].transform.position = transform.position;
-                    BulletPool[i].transform.rotation = transform.rotation;
-                    BulletPool[i].SetActive(true);
-                    BulletPool[i].GetComponent<Rigidbody2D>().AddForce(BulletPool[i].transform.right*250);
+                    gManager.BulletPool[i].transform.position = transform.position;
+                    gManager.BulletPool[i].transform.rotation = transform.rotation;
+                    gManager.BulletPool[i].SetActive(true);
+                    gManager.BulletPool[i].GetComponent<Rigidbody2D>().AddForce(gManager.BulletPool[i].transform.right * 250);
                     //BulletPool[i].GetComponent<BulletScript>().Damage = this.gameObject.GetComponent<Player>().getFirePower();
                     break;
                 }

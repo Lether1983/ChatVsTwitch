@@ -19,6 +19,13 @@ public class CameraFollowScript : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = Player.transform.position + Offset;
+        if (Player == null)
+        {
+            Player = GameObject.Find("Player(Clone)");
+        }
+        else
+        {
+            transform.position = Player.transform.position + Offset;
+        }
     }
 }

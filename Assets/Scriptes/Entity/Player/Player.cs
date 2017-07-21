@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Entitys
 {
@@ -15,8 +16,8 @@ public class Player : Entitys
     private int lifes = 3;
     private int Armorpoints;
 
-    public int Health {get{ return health; }}
-    public int Lifes { get { return lifes; }}
+    public int Health { get { return health; } }
+    public int Lifes { get { return lifes; } }
 
     void Start()
     {
@@ -53,8 +54,25 @@ public class Player : Entitys
         if (health <= 0)
         {
             lifes--;
+            if (lifes == 0)
+            {
+                SceneManager.LoadScene("LostScene");
+            }   
+            else
+            {
+                SavePlayerValueAndDestroy();
+                RestartPlayer();
+                DestroyObject();
+            }
         }
         Debug.Log(Health);
+    }
+
+    private void RestartPlayer()
+    {
+        CreateNewPlayer();
+        LoadPlayerValue();
+        gmanager.SManager.RestartPlayerPosition();
     }
 
     //TODO: ADD And MODIFY Decorator create
@@ -71,7 +89,15 @@ public class Player : Entitys
     public void SavePlayerValueAndDestroy()
     {
         gmanager.GetComponent<PlayerValueHolder>().Lifes = lifes;
-        Destroy(this.gameObject);
+    }
+
+    public void DestroyObject()
+    {
+        for (int i = 0; i < gmanager.BulletPool.Count; i++)
+        {
+            Destroy(gmanager.BulletPool[i]);
+        }
+        Destroy(gameObject);
     }
 
     private void LoadPlayerValue()
@@ -98,7 +124,7 @@ public class Player : Entitys
             {
                 mySkin = EntityDecorator[i].Generate() as Uniform;
             }
-
         }
+        health = 100;
     }
 }

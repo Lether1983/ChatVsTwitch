@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public Container container;
     public bool CompletTarget;
     public bool VoteDone;
+    public List<GameObject> BulletPool;
 
     [SerializeField]
     private CaveTesselator tesselator = null;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour, IGameManager
     //TODO: Variable Dynamic for the Channels
     private string ChannelName = "lether";
 
-    public SpawnManager SManager { get; set; }
+    public SpawnManager SManager { get { return sManager; } set { sManager = value; } }
 
     private void Awake()
     {
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new TrapGenerator());
     }
 
+
     public void DeleteTheCurrentMap()
     {
         GameObject[] Removal = GameObject.FindGameObjectsWithTag("Enviroment");
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour, IGameManager
             Destroy(Removal[i]);
         }
         player.SavePlayerValueAndDestroy();
+        player.DestroyObject();
     }
 
     public void ModifyCurrentLevel()
