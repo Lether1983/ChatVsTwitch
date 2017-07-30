@@ -7,6 +7,8 @@ using System.IO;
 public class SettingManager : MonoBehaviour
 {
     [SerializeField]
+    private MenuController controller;
+    [SerializeField]
     private Toggle fullscreenToggle;
     [SerializeField]
     private Dropdown resolutionDropdown;
@@ -79,6 +81,7 @@ public class SettingManager : MonoBehaviour
     public void OnApplyButtonClick()
     {
         SaveSettings();
+        controller.ActiveMenuPanel();
     }
 
     public void SaveSettings()
