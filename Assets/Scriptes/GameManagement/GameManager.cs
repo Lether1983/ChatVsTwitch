@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour, IGameManager
     private int activeVoteCount;
 
     //TODO: Variable Dynamic for the Channels
-    private string ChannelName = "lether";
+    private string ChannelName = "";
 
     public SpawnManager SManager { get { return sManager; } set { sManager = value; } }
 
@@ -57,7 +57,9 @@ public class GameManager : MonoBehaviour, IGameManager
 
     void Start()
     {
+        ChannelName = GameObject.Find("ValueHolder").GetComponent<ValueHolderScript>().TwitchName;
         irc = new IrcClient("irc.twitch.tv", 6667, "missionagainstchatbot", "oauth:f4rfrtulipsiiqbdoaqdb2s7nhr2ou");
+        JoinChat();
         levelMap = new Map();
         FillTheFirstMap();
 
@@ -89,8 +91,6 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
-        levelMap.AddDecorater(new MineGenerator());
-        levelMap.AddDecorater(new TrapGenerator());
     }
 
 

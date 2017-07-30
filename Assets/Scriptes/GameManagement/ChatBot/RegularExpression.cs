@@ -17,6 +17,7 @@ public class RegularExpression : MonoBehaviour
     [SerializeField]
     SpawnManager sManager;
 
+
     void Start()
     {
         gameManager = this.gameObject.GetComponent<GameManager>();
@@ -62,12 +63,12 @@ public class RegularExpression : MonoBehaviour
                     gameManager.activeVote.Answercount1++;
                     gameManager.activeVote.Totalcount++;
                 }
-                else if (vote.Value.ToLower() == gameManager.activeVote.Answer2)
+                if (vote.Value.ToLower() == gameManager.activeVote.Answer2)
                 {
                     gameManager.activeVote.Answercount2++;
                     gameManager.activeVote.Totalcount++;
                 }
-                else if (vote.Value.ToLower() == gameManager.activeVote.Answer3)
+                if (vote.Value.ToLower() == gameManager.activeVote.Answer3)
                 {
                     gameManager.activeVote.Answercount3++;
                     gameManager.activeVote.Totalcount++;

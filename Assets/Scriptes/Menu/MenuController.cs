@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class MenuController : MonoBehaviour
     private GameObject OptionPanel;
     [SerializeField]
     private GameObject MenuPanel;
+    [SerializeField]
+    private InputField inputField;
+    [SerializeField]
+    private ValueHolderScript valueholder;
 
     private void OnEnable()
     {
@@ -29,7 +34,11 @@ public class MenuController : MonoBehaviour
 
     public void StartLevel()
     {
-        SceneManager.LoadScene("GameScene");
+        if (inputField.text != "")
+        {
+            valueholder.TwitchName = inputField.text;
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
     public void CloseGame()

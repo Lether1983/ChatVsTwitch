@@ -170,5 +170,6 @@ public class VoteManager : MonoBehaviour
         gmanager.activeVote.Answercount1 = 0;
         gmanager.activeVote.Answercount2 = 0;
         gmanager.activeVote.Answercount3 = 0;
+        gmanager.activeVote.Totalcount = 0;
     }
 }
