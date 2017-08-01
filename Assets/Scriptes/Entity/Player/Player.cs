@@ -28,7 +28,7 @@ public class Player : Entitys
         EntityDecorator.Add(new UniformGenerator());
         CreateNewPlayer();
         LoadPlayerValue();
-        //Armorpoints = getArmorPoints();
+        Armorpoints = getArmorPoints();
     }
 
     private int getArmorPoints()
@@ -81,11 +81,6 @@ public class Player : Entitys
 
     }
 
-    public void ModifyDecorator()
-    {
-
-    }
-
     public void SavePlayerValueAndDestroy()
     {
         gmanager.GetComponent<PlayerValueHolder>().Lifes = lifes;
@@ -110,21 +105,40 @@ public class Player : Entitys
         for (int i = 0; i < EntityDecorator.Count; i++)
         {
             IEntityGenerator = EntityDecorator[i];
-            IEntityGenerator.Setup();
+
 
             if (EntityDecorator[i].GetType() == typeof(WeaponGenerator))
             {
+                IEntityGenerator.Setup("AssaultRifle");
                 myWeapon = EntityDecorator[i].Generate() as Weapon;
             }
             else if (EntityDecorator[i].GetType() == typeof(ArmorGenerator))
             {
+                IEntityGenerator.Setup("NormalArmor");
                 myArmor = EntityDecorator[i].Generate() as Armor;
             }
             else
             {
+                IEntityGenerator.Setup("NormalUniform");
                 mySkin = EntityDecorator[i].Generate() as Uniform;
             }
         }
         health = 100;
+    }
+
+    internal void ModifyDecorater(string decorator, string name)
+    {
+        if(decorator.GetType() == typeof(WeaponGenerator))
+        {
+            myWeapon = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Weapon;
+        }
+        else if(decorator.GetType() == typeof(ArmorGenerator))
+        {
+            myArmor = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Armor;
+        }
+        else
+        {
+            mySkin = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Uniform;
+        }
     }
 }

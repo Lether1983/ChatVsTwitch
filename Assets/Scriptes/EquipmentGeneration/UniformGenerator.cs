@@ -5,12 +5,27 @@ using UnityEngine;
 
 public class UniformGenerator : IEntityGenerator
 {
+    private string uniformName;
+    string Name = "UniformGenerator";
+
     public Equipment Generate()
     {
-        return null;
+        Uniform uniform = Resources.Load("Prefabs/Equipment/Uniform/" + uniformName) as Uniform;
+        return uniform;
     }
 
-    public void Setup()
+    public string GetName()
     {
+        return Name;
+    }
+
+    public void Modify(string name)
+    {
+
+    }
+
+    public void Setup(string name)
+    {
+        uniformName = name;
     }
 }

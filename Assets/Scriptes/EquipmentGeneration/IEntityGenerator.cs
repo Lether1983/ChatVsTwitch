@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IEntityGenerator
 {
-    void Setup();
+    void Setup(string name);
     Equipment Generate();
+    string GetName();
+    void Modify(string name);
 }

@@ -41,18 +41,20 @@ public class Enemy : Entitys
         for (int i = 0; i < EntityDecorator.Count; i++)
         {
             IEntityGenerator = EntityDecorator[i];
-            IEntityGenerator.Setup();
 
             if (EntityDecorator[i].GetType() == typeof(WeaponGenerator))
             {
+                IEntityGenerator.Setup("AssaultRifle");
                 myWeapon = EntityDecorator[i].Generate() as Weapon;
             }
             else if (EntityDecorator[i].GetType() == typeof(ArmorGenerator))
             {
+                IEntityGenerator.Setup("NormalArmor");
                 myArmor = EntityDecorator[i].Generate() as Armor;
             }
             else
             {
+                IEntityGenerator.Setup("NormalUniform");
                 mySkin = EntityDecorator[i].Generate() as Uniform;
             }
 

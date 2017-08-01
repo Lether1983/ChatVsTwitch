@@ -79,38 +79,45 @@ public class VoteManager : MonoBehaviour
 
     public void decideTheVoteResult()
     {
+
         deciderDict.Clear();
+
         deciderDict.Add(gmanager.activeVote.Answercount1, gmanager.activeVote.Answer1);
+
         if (gmanager.activeVote.Answercount2 != gmanager.activeVote.Answercount1)
         {
             deciderDict.Add(gmanager.activeVote.Answercount2, gmanager.activeVote.Answer2);
         }
+
         if (gmanager.activeVote.Answercount3 != gmanager.activeVote.Answercount1 && gmanager.activeVote.Answercount3 != gmanager.activeVote.Answercount2)
         {
             deciderDict.Add(gmanager.activeVote.Answercount3, gmanager.activeVote.Answer3);
         }
+
         var list = deciderDict.Keys.ToList();
+
         list.Sort();
-        Debug.Log(list[list.Count - 1]);
+
         var item = deciderDict[list[list.Count - 1]];
-        Debug.Log(item);
+
         //TODO: Add the Logic for the Standard VoteObjects
         if (gmanager.activeVote is CharakterVoteObject)
         {
             if (item == "heavy")
             {
-                //Change the Standard Value + The Change Value
+                gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "heavy");
             }
             else if (item == "normal") {/*Nothing happend*/}
             else if (item == "light")
             {
-                //Change the Standard Value - The Change Value
+                gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "light");
             }
             else if (item == "yes")
             {
                 //gmanager.player.AddDecorator()
             }
             else if (item == "no") {/*nothing happend*/}
+            else if (item == "change") {/*TODO: Modfiy the Uniform*/ }
 
         }
         else if (gmanager.activeVote is EnviromentVoteObject)
