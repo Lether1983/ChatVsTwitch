@@ -54,7 +54,7 @@ public class RegularExpression : MonoBehaviour
                     sManager.SpawnIncomeingFire(rowint, coloumint);
                 }
             }
-            else
+            if(!string.IsNullOrEmpty(gameManager.message))
             {
                 var vote = voteRegex.Match(gameManager.message);
 

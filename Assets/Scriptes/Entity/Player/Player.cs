@@ -7,14 +7,19 @@ using UnityEngine.SceneManagement;
 public class Player : Entitys
 {
     public GameManager gmanager;
+    [SerializeField]
     Weapon myWeapon;
+    [SerializeField]
     Armor myArmor;
+    [SerializeField]
     Uniform mySkin;
     [SerializeField]
     private int health = 100;
     [SerializeField]
     private int lifes = 3;
     private int Armorpoints;
+    private int currentAmmo;
+    private int MaxAmmo;
 
     public int Health { get { return health; } }
     public int Lifes { get { return lifes; } }
@@ -29,11 +34,22 @@ public class Player : Entitys
         CreateNewPlayer();
         LoadPlayerValue();
         Armorpoints = getArmorPoints();
+        MaxAmmo = myWeapon.MaxAmmo;
+        currentAmmo = myWeapon.currentClip;
     }
 
     private int getArmorPoints()
     {
         return myArmor.ArmorPoints;
+    }
+
+    public int GetCurrenAmmo()
+    {
+        return currentAmmo;
+    }
+    public int GetMaxAmmo()
+    {
+        return MaxAmmo;
     }
 
     public int getFirePower()
