@@ -17,10 +17,14 @@ public class Player : Entitys
     private int health = 100;
     [SerializeField]
     private int lifes = 3;
+    private bool haveToReload;
     private int Armorpoints;
-    private int currentAmmo;
-    private int MaxAmmo;
 
+    private int currentAmmo;
+    private int maxAmmo;
+
+    public int CurrentAmmo{get { return currentAmmo; }set { currentAmmo = value; }}
+    public int MaxAmmo{get { return maxAmmo; }set { maxAmmo = value; }}
     public int Health { get { return health; } }
     public int Lifes { get { return lifes; } }
 
@@ -35,18 +39,35 @@ public class Player : Entitys
         LoadPlayerValue();
         Armorpoints = getArmorPoints();
         MaxAmmo = myWeapon.MaxAmmo;
-        currentAmmo = myWeapon.currentClip;
+        CurrentAmmo = myWeapon.currentClip;
     }
 
+    private void Update()
+    {
+        if(currentAmmo <= 1)
+        {
+            haveToReload = true;
+        }
+        if(haveToReload && maxAmmo > 0)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                CurrentAmmo = myWeapon.currentClip;
+                MaxAmmo -= CurrentAmmo;
+                haveToReload = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            MaxAmmo -= (myWeapon.currentClip-CurrentAmmo);
+            CurrentAmmo = myWeapon.currentClip;
+        }
+    }
     private int getArmorPoints()
     {
         return myArmor.ArmorPoints;
     }
-
-    public int GetCurrenAmmo()
-    {
-        return currentAmmo;
-    }
+   
     public int GetMaxAmmo()
     {
         return MaxAmmo;
@@ -91,7 +112,7 @@ public class Player : Entitys
         gmanager.SManager.RestartPlayerPosition();
     }
 
-    //TODO: ADD And MODIFY Decorator create
+    //TODO: ADD Decorator create
     public void AddDecorator()
     {
 

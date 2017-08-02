@@ -28,12 +28,16 @@ public class FireWeapon : MonoBehaviour
             {
                 if (!gManager.BulletPool[i].activeInHierarchy)
                 {
-                    gManager.BulletPool[i].transform.position = transform.position;
-                    gManager.BulletPool[i].transform.rotation = transform.rotation;
-                    gManager.BulletPool[i].SetActive(true);
-                    gManager.BulletPool[i].GetComponent<Rigidbody2D>().AddForce(gManager.BulletPool[i].transform.right * 250);
-                    //BulletPool[i].GetComponent<BulletScript>().Damage = this.gameObject.GetComponent<Player>().getFirePower();
-                    break;
+                    if (this.GetComponentInParent<Player>().CurrentAmmo > 0 && this.GetComponentInParent<Player>().MaxAmmo >= 0)
+                    {
+                        gManager.BulletPool[i].transform.position = transform.position;
+                        gManager.BulletPool[i].transform.rotation = transform.rotation;
+                        gManager.BulletPool[i].SetActive(true);
+                        gManager.BulletPool[i].GetComponent<Rigidbody2D>().AddForce(gManager.BulletPool[i].transform.right * 250);
+                        gManager.BulletPool[i].GetComponent<BulletScript>().Damage = this.gameObject.GetComponentInParent<Player>().getFirePower();
+                        this.GetComponentInParent<Player>().CurrentAmmo--;
+                        break;
+                    }
                 }
             }
         }

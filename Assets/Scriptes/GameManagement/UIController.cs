@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         if(activePlayer != null)
         {
             CurrentHealth.text = activePlayer.Health.ToString();
-            CurrenAmmoCount.text = activePlayer.GetCurrenAmmo().ToString();
+            CurrenAmmoCount.text = activePlayer.CurrentAmmo.ToString();
             MaxAmmoCount.text = activePlayer.GetMaxAmmo().ToString();
             //LifeCount.text = activePlayer.Lifes.ToString();
         }

@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour, IGameManager
     private Map currentMap;
     private int activeVoteCount;
 
-    //TODO: Variable Dynamic for the Channels
     private string ChannelName = "";
 
     public SpawnManager SManager { get { return sManager; } set { sManager = value; } }
