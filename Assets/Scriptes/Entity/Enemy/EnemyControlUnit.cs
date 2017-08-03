@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyControlUnit : MonoBehaviour
 {
     [SerializeField]
+    private GameManager gmanager;
+    [SerializeField]
     Rigidbody2D contoller;
     [SerializeField]
     Vector2 Movedirection;

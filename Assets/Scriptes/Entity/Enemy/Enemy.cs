@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class Enemy : Entitys
 {
+   
     [SerializeField]
     private int health = 100;
-    Weapon myWeapon;
-    Armor myArmor;
-    Uniform mySkin;
+    private Weapon myWeapon;
+    private Armor myArmor;
+    private Uniform mySkin;
+    private bool inFireDistance;
+
+    public bool IsInFireDistance
+    {
+        get { return inFireDistance; }
+        set { inFireDistance = value; }
+    }
+
+
+
+    public int Health { get { return health; } set { health = value; } }
 
     void Start()
     {
@@ -18,11 +30,12 @@ public class Enemy : Entitys
         EntityDecorator.Add(new UniformGenerator());
         CreateNewEnemy();
     }
-    public int Health { get { return health; } set { health = value; } }
+
     public void AddDecorator()
     {
 
     }
+
     public void ModifyDecorator()
     {
 
@@ -36,6 +49,7 @@ public class Enemy : Entitys
             Destroy(this.gameObject);
         }
     }
+
     public void CreateNewEnemy()
     {
         for (int i = 0; i < EntityDecorator.Count; i++)

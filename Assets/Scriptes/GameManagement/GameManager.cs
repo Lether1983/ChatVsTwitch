@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour, IGameManager
     public bool CompletTarget;
     public bool VoteDone;
     public List<GameObject> BulletPool;
+    public List<GameObject> EnemyBulletPool;
 
+    [SerializeField]
+    private GameObject SpritePrefab;
     [SerializeField]
     private CaveTesselator tesselator = null;
     [SerializeField]
@@ -56,6 +59,12 @@ public class GameManager : MonoBehaviour, IGameManager
 
     void Start()
     {
+        for (int i = 0; i < 50; i++)
+        {
+            GameObject Temp = Instantiate(SpritePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            Temp.SetActive(false);
+            EnemyBulletPool.Add(Temp);
+        }
         ChannelName = GameObject.Find("ValueHolder").GetComponent<ValueHolderScript>().TwitchName;
         irc = new IrcClient("irc.twitch.tv", 6667, "missionagainstchatbot", "oauth:f4rfrtulipsiiqbdoaqdb2s7nhr2ou");
         JoinChat();
