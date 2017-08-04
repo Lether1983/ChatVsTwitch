@@ -13,6 +13,8 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private InputField inputField;
     [SerializeField]
+    private GameObject QuitPanel;
+    [SerializeField]
     private ValueHolderScript valueholder;
 
     private void OnEnable()
@@ -39,6 +41,15 @@ public class MenuController : MonoBehaviour
             valueholder.TwitchName = inputField.text;
             SceneManager.LoadScene("GameScene");
         }
+    }
+
+    public void BackToMenu()
+    {
+        QuitPanel.SetActive(false);
+    }
+    public void ReallyQuitGame()
+    {
+        QuitPanel.SetActive(true);
     }
 
     public void CloseGame()
