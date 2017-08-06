@@ -89,6 +89,23 @@ public class SpawnManager : MonoBehaviour
         Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
     }
 
+    //TODO: SpawnEnemys On the Map
+    public void SpawnEnemys(Map levelmap)
+    {
+
+    }
+
+    //TODO: SpawnRebels near Player Position
+    public void SpawnRebelsNearPlayer()
+    {
+
+    }
+    //TODO: SpawnEnemys near Player Position
+    public void SpawnEnemyNearPlayer()
+    {
+
+    }
+
     public void SpawnExitPoint(Map levelmap)
     {
         for (int x = 0; x < levelmap.MapWidth; x++)

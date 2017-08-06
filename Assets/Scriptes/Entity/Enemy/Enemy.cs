@@ -12,15 +12,8 @@ public class Enemy : Entitys
     private Uniform mySkin;
     private bool inFireDistance;
 
-    public bool IsInFireDistance
-    {
-        get { return inFireDistance; }
-        set { inFireDistance = value; }
-    }
-
-
-
     public int Health { get { return health; } set { health = value; } }
+    public bool IsInFireDistance { get { return inFireDistance; } set { inFireDistance = value; } }
 
     void Start()
     {
@@ -31,14 +24,25 @@ public class Enemy : Entitys
         CreateNewEnemy();
     }
 
-    public void AddDecorator()
+    public void AddDecorator(IEntityGenerator decorator)
     {
-
+        //Can be Used for more Decorators if i know something new
     }
 
-    public void ModifyDecorator()
+    internal void ModifyDecorator(string decorator, string name)
     {
-
+        if (decorator.GetType() == typeof(WeaponGenerator))
+        {
+            myWeapon = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Weapon;
+        }
+        else if (decorator.GetType() == typeof(ArmorGenerator))
+        {
+            myArmor = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Armor;
+        }
+        else
+        {
+            mySkin = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Uniform;
+        }
     }
 
     public void getDamage(int damage)

@@ -9,6 +9,7 @@ public class VoteObject : ScriptableObject
     public string Answer1, Answer2, Answer3;
     public int Answercount1, Answercount2, Answercount3;
     public int Totalcount;
+    public string TypeofEntity;
     public string Classname;
 
     [ClassImplements(typeof(IMapGenerator), AllowAbstract = false)]

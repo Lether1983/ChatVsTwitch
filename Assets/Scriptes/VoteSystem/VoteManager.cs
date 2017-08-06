@@ -105,16 +105,54 @@ public class VoteManager : MonoBehaviour
         {
             if (item == "heavy")
             {
-                gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "heavy");
+                if (gmanager.activeVote.TypeofEntity == "Enemy")
+                {
+                    for (int i = 0; i < gmanager.EnemyList.Count; i++)
+                    {
+                        //TODO: Test it
+                        gmanager.EnemyList[i].ModifyDecorator(gmanager.activeVote.Classname, "heavy");
+                    }
+                }
+                else
+                {
+                    //TODO: Test it
+                    gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "heavy");
+                }
             }
             else if (item == "normal") {/*Nothing happend*/}
             else if (item == "light")
             {
-                gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "light");
+                if (gmanager.activeVote.TypeofEntity == "Enemy")
+                {
+                    for (int i = 0; i < gmanager.EnemyList.Count; i++)
+                    {
+                    //TODO: Test it
+                        gmanager.EnemyList[i].ModifyDecorator(gmanager.activeVote.Classname, "light");
+                    }
+                }
+                else
+                {
+                //TODO: Test it
+                    gmanager.player.ModifyDecorater(gmanager.activeVote.Classname, "light");
+                }
             }
             else if (item == "yes")
             {
-                //gmanager.player.AddDecorator()
+                if (gmanager.activeVote.TypeofEntity == "Enemy")
+                {
+                    for (int i = 0; i < gmanager.EnemyList.Count; i++)
+                    {
+                        //TODO: Test it
+                        var type = Type.GetType(gmanager.activeVote.Classname);
+                        gmanager.EnemyList[i].AddDecorator((IEntityGenerator)Activator.CreateInstance(type));
+                    }
+                }
+                else
+                {
+                    //TODO: Test it
+                    var type = Type.GetType(gmanager.activeVote.Classname);
+                    gmanager.player.AddDecorator((IEntityGenerator)Activator.CreateInstance(type));
+                }
             }
             else if (item == "no") {/*nothing happend*/}
             else if (item == "change") {/*TODO: Modfiy the Uniform*/ }
@@ -124,11 +162,10 @@ public class VoteManager : MonoBehaviour
         {
             if (item == "more")
             {
-                //Change the Standard Value + The Change Value
                 gmanager.levelMap.ModifyDecorater(gmanager.activeVote.Classname, changeValue);
                 if (gmanager.activeVote.name == "AirStrikeVote")
                 {
-                    //send more as one Airstrike
+                    //TODO: send more as one Airstrike
                 }
             }
             else if (item == "equal") {/*Nothing happend*/}
@@ -138,16 +175,28 @@ public class VoteManager : MonoBehaviour
             }
             else if (item == "yes")
             {
-                //gmanager.levelMap.AddDecorater()
+                if (gmanager.activeVote.name == "RebelVote")
+                {
+
+                    //TODO: Test it
+                    gmanager.SManager.SpawnRebelsNearPlayer();
+                }
+                else
+                {
+                    //TODO: Test it
+                    var type = Type.GetType(gmanager.activeVote.Classname);
+                    gmanager.levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
+                }
             }
             else if (item == "no") {/*nothing happend*/}
             else if (item == "fake")
             {
-                // Send fake Packet
+                //TODO: Send fake Packet
             }
             else if (item == "enemy")
             {
-                //SpawnEnemys not Rebels
+                //TODO: Test it
+                gmanager.SManager.SpawnEnemyNearPlayer();
             }
         }
         else if (gmanager.activeVote is BiomVoteObject)

@@ -112,10 +112,9 @@ public class Player : Entitys
         gmanager.SManager.RestartPlayerPosition();
     }
 
-    //TODO: ADD Decorator create
-    public void AddDecorator()
+    public void AddDecorator(IEntityGenerator decorator)
     {
-
+        //Can be Used for more Decorators if i know something new
     }
 
     public void SavePlayerValueAndDestroy()

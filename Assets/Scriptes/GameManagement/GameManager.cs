@@ -71,11 +71,7 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap = new Map();
         FillTheFirstMap();
 
-        //TODO: SUCCESSFULL TRY NEED A SECOND OPINION
-        /*
-        var type = Type.GetType(activeVote.Classname);
-        levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
-        */
+       
         currentMap = levelMap;
         GenerateLevel();
         vManager.GameBegin();
