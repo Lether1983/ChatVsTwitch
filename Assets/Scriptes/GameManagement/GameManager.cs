@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
+        levelMap.AddDecorater(new MineGenerator());
     }
 
 
