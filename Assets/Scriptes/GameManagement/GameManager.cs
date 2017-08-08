@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour, IGameManager
     private string ChannelName = "";
 
     public SpawnManager SManager { get { return sManager; } set { sManager = value; } }
+    public Map CurrentMap { get { return currentMap; } set { currentMap = value; } }
 
     private void Awake()
     {
@@ -71,11 +72,9 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap = new Map();
         FillTheFirstMap();
 
-       
         currentMap = levelMap;
         GenerateLevel();
         vManager.GameBegin();
-
     }
 
     private void GenerateLevel()

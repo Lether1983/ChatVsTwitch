@@ -10,10 +10,9 @@ public class Enemy : Entitys
     private Weapon myWeapon;
     private Armor myArmor;
     private Uniform mySkin;
-    private bool inFireDistance;
+    
 
     public int Health { get { return health; } set { health = value; } }
-    public bool IsInFireDistance { get { return inFireDistance; } set { inFireDistance = value; } }
 
     void Start()
     {

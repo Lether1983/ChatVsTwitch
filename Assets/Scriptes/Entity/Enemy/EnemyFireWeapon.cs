@@ -15,7 +15,7 @@ public class EnemyFireWeapon : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (this.gameObject.GetComponent<Enemy>().IsInFireDistance)
+        if (this.gameObject.GetComponent<EnemyControlUnit>().IsInFireDistance)
         {
             if (timer > 1)
             {

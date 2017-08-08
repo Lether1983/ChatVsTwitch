@@ -23,8 +23,8 @@ public class Player : Entitys
     private int currentAmmo;
     private int maxAmmo;
 
-    public int CurrentAmmo{get { return currentAmmo; }set { currentAmmo = value; }}
-    public int MaxAmmo{get { return maxAmmo; }set { maxAmmo = value; }}
+    public int CurrentAmmo { get { return currentAmmo; } set { currentAmmo = value; } }
+    public int MaxAmmo { get { return maxAmmo; } set { maxAmmo = value; } }
     public int Health { get { return health; } }
     public int Lifes { get { return lifes; } }
 
@@ -40,17 +40,18 @@ public class Player : Entitys
         Armorpoints = getArmorPoints();
         MaxAmmo = myWeapon.MaxAmmo;
         CurrentAmmo = myWeapon.currentClip;
+        health += Armorpoints;
     }
 
     private void Update()
     {
-        if(currentAmmo <= 1)
+        if (currentAmmo <= 1)
         {
             haveToReload = true;
         }
-        if(haveToReload && maxAmmo > 0)
+        if (haveToReload && maxAmmo > 0)
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 CurrentAmmo = myWeapon.currentClip;
                 MaxAmmo -= CurrentAmmo;
@@ -59,7 +60,7 @@ public class Player : Entitys
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            MaxAmmo -= (myWeapon.currentClip-CurrentAmmo);
+            MaxAmmo -= (myWeapon.currentClip - CurrentAmmo);
             CurrentAmmo = myWeapon.currentClip;
         }
     }
@@ -67,7 +68,7 @@ public class Player : Entitys
     {
         return myArmor.ArmorPoints;
     }
-   
+
     public int GetMaxAmmo()
     {
         return MaxAmmo;
@@ -80,21 +81,15 @@ public class Player : Entitys
 
     public void getDamage(int Damage)
     {
-        if (Armorpoints <= 0)
-        {
-            health -= Damage;
-        }
-        else
-        {
-            Armorpoints -= Damage;
-        }
+        health -= Damage;
+
         if (health <= 0)
         {
             lifes--;
             if (lifes == 0)
             {
                 SceneManager.LoadScene("LostScene");
-            }   
+            }
             else
             {
                 SavePlayerValueAndDestroy();
@@ -164,11 +159,11 @@ public class Player : Entitys
 
     internal void ModifyDecorater(string decorator, string name)
     {
-        if(decorator.GetType() == typeof(WeaponGenerator))
+        if (decorator.GetType() == typeof(WeaponGenerator))
         {
             myWeapon = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Weapon;
         }
-        else if(decorator.GetType() == typeof(ArmorGenerator))
+        else if (decorator.GetType() == typeof(ArmorGenerator))
         {
             myArmor = Resources.Load("Prefabs/Equipment/Weapon/" + name) as Armor;
         }
