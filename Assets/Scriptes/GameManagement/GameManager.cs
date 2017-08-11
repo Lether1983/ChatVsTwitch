@@ -92,9 +92,9 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new DungeonGenerator());
         levelMap.AddDecorater(new SpawnpointGenerator());
         levelMap.AddDecorater(new ExitpointGenerator());
-        levelMap.AddDecorater(new BushGenerator());
-        levelMap.AddDecorater(new TreeGenerator());
-        levelMap.AddDecorater(new StoneGenerator());
+        //levelMap.AddDecorater(new BushGenerator());
+        //levelMap.AddDecorater(new TreeGenerator());
+        //levelMap.AddDecorater(new StoneGenerator());
         levelMap.AddDecorater(new EnemyGenerator());
     }
 

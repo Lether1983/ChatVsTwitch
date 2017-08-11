@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : Entitys
 {
-    GameManager gManager;
     [SerializeField]
     private int health = 100;
     private Weapon myWeapon;
@@ -16,7 +15,6 @@ public class Enemy : Entitys
 
     void Start()
     {
-        gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         EntityDecorator = new List<IEntityGenerator>();
         EntityDecorator.Add(new WeaponGenerator());
         EntityDecorator.Add(new ArmorGenerator());
