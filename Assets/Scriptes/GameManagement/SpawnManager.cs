@@ -20,6 +20,8 @@ public class SpawnManager : MonoBehaviour
     private SpawnObject[] spawnObjects = null;
     [SerializeField]
     private GameObject ActivePlayer;
+    [SerializeField]
+    private GameObject Enemyprefab;
 
     private Vector2 Startposition;
 
@@ -92,7 +94,21 @@ public class SpawnManager : MonoBehaviour
     //TODO: SpawnEnemys On the Map
     public void SpawnEnemys(Map levelmap)
     {
-
+        for (int x = 0; x < levelmap.MapWidth; x++)
+        {
+            for (int y = 0; y < levelmap.MapHeight; y++)
+            {
+                if ((levelmap.Get(x, y) & 4) > 0)
+                {
+                    var entity = levelmap.Get(x, y) >> 10;
+                    if (entity == 2)
+                    {
+                        GameObject temp = Instantiate(Enemyprefab, new Vector2(x, y), Quaternion.identity) as GameObject;
+                        GetComponent<GameManager>().EnemyList.Add(temp.GetComponent<Enemy>());
+                    }
+                }
+            }
+        }
     }
 
     //TODO: SpawnRebels near Player Position

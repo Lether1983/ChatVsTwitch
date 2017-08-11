@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour, IGameManager
         tesselator.Tesselate();
         sManager.SpawnObjects(currentMap);
         sManager.SpawnPlayer(currentMap);
+        sManager.SpawnEnemys(currentMap);
     }
 
     private void FillTheFirstMap()
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
         levelMap.AddDecorater(new StoneGenerator());
-        levelMap.AddDecorater(new MineGenerator());
+        levelMap.AddDecorater(new EnemyGenerator());
     }
 
 

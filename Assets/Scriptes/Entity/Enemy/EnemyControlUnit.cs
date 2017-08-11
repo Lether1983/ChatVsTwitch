@@ -26,7 +26,6 @@ public class EnemyControlUnit : MonoBehaviour
     {
         Movedirection = Vector2.zero;
         FindFirstTarget();
-
     }
 
     private void FindFirstTarget()
@@ -50,10 +49,21 @@ public class EnemyControlUnit : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Vector2.Distance(transform.position, target.transform.position) < 2)
+        if (Vector2.Distance(transform.position, target.transform.position) < 0.5f)
+        {
+            NextWaypoint();
+        }
+        else
         {
             MoveTo();
         }
+    }
+
+    private void NextWaypoint()
+    {
+        int RndX = UnityEngine.Random.Range((int)this.transform.position.x - 3, (int)this.transform.position.x + 3);
+        int RndY = UnityEngine.Random.Range((int)this.transform.position.y - 3, (int)this.transform.position.y + 3);
+        target.transform.position = new Vector2(RndX, RndY);
     }
 
     private void MoveTo()
