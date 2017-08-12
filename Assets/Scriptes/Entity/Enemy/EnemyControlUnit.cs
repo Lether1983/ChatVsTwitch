@@ -19,9 +19,13 @@ public class EnemyControlUnit : MonoBehaviour
     private float turnSpeed;
     [SerializeField]
     private float Distance;
-    private bool inFireDistance;
     [SerializeField]
     private GameObject target;
+    [SerializeField]
+    private int WaypointRange = 6;
+
+    private bool inFireDistance;
+    private float Timer;
 
     public bool IsInFireDistance { get { return inFireDistance; } set { inFireDistance = value; } }
 
@@ -35,28 +39,42 @@ public class EnemyControlUnit : MonoBehaviour
 
     private void FindFirstTarget()
     {
-        int RndX = UnityEngine.Random.Range((int)this.transform.position.x - 3, (int)this.transform.position.x + 3);
-        int RndY = UnityEngine.Random.Range((int)this.transform.position.y - 3, (int)this.transform.position.y + 3);
-        if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
+        int RndX = UnityEngine.Random.Range((int)this.transform.position.x - WaypointRange, (int)this.transform.position.x + WaypointRange);
+        int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
+        if (RndX > 0 || RndX < gManager.levelMap.RandomMap.GetLength(0) || RndY > 0 || RndY < gManager.levelMap.RandomMap.GetLength(1))
         {
-            GameObject temp = Instantiate(targetPrefab, new Vector3(RndX, RndY), Quaternion.identity) as GameObject;
+            if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
+            {
+                GameObject temp = Instantiate(targetPrefab, new Vector3(RndX, RndY), Quaternion.identity) as GameObject;
 
-            target = temp;
+                target = temp;
+            }
+            else
+            {
+                FindFirstTarget();
+            }
         }
         else
         {
             FindFirstTarget();
         }
+
     }
     private void Update()
     {
-        Distance = Vector3.Distance(target.transform.position, transform.position);
-        if (Distance < 1f)
+        if (target != null)
         {
-            NextWaypoint();
-            Turn();
+            Timer += Time.deltaTime;
+            Distance = Vector3.Distance(target.transform.position, transform.position);
+            if (Distance < 1f || Timer > 6)
+            {
+                NextWaypoint();
+                Turn();
+                Timer = 0;
+            }
         }
     }
+
     private void Turn()
     {
         float angle = Mathf.Atan2(-transform.position.y + target.transform.position.y, -transform.position.x + target.transform.position.x) * Mathf.Rad2Deg;
@@ -65,21 +83,28 @@ public class EnemyControlUnit : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        MoveTo();
+       // MoveTo();
     }
 
     private void NextWaypoint()
     {
-        int RndX = UnityEngine.Random.Range((int)this.transform.position.x - 3, (int)this.transform.position.x + 3);
-        int RndY = UnityEngine.Random.Range((int)this.transform.position.y - 3, (int)this.transform.position.y + 3);
-        //if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
-        //{
-            target.transform.position = new Vector3(RndX, RndY);
-        //}
-        //else
-        //{
-        //    NextWaypoint();
-        //}
+        int RndX = UnityEngine.Random.Range((int)this.transform.position.x - WaypointRange, (int)this.transform.position.x + WaypointRange);
+        int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
+        if (RndX > 0 || RndX < gManager.levelMap.RandomMap.GetLength(0) - 1 || RndY > 0 || RndY < gManager.levelMap.RandomMap.GetLength(1) - 1)
+        {
+            if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
+            {
+                target.transform.position = new Vector3(RndX, RndY);
+            }
+            else
+            {
+                NextWaypoint();
+            }
+        }
+        else
+        {
+            NextWaypoint();
+        }
     }
 
     private void MoveTo()
