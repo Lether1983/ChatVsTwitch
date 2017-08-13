@@ -27,6 +27,7 @@ public class Player : Entitys
     public int MaxAmmo { get { return maxAmmo; } set { maxAmmo = value; } }
     public int Health { get { return health; } }
     public int Lifes { get { return lifes; } }
+    public GameObject GetGameObject { get { return this.gameObject; } set {;} }
 
     void Start()
     {

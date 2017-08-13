@@ -23,6 +23,9 @@ public class EnemyControlUnit : MonoBehaviour
     private GameObject target;
     [SerializeField]
     private int WaypointRange = 6;
+    [SerializeField]
+    private GameObject Player;
+
 
     private bool inFireDistance;
     private float Timer;
@@ -32,6 +35,7 @@ public class EnemyControlUnit : MonoBehaviour
     private void Start()
     {
         gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Player = GameObject.Find("Player(Clone)");
         Movedirection = Vector2.zero;
         FindFirstTarget();
         Turn();
@@ -41,7 +45,7 @@ public class EnemyControlUnit : MonoBehaviour
     {
         int RndX = UnityEngine.Random.Range((int)this.transform.position.x - WaypointRange, (int)this.transform.position.x + WaypointRange);
         int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
-        if (RndX > 0 || RndX < gManager.levelMap.RandomMap.GetLength(0) || RndY > 0 || RndY < gManager.levelMap.RandomMap.GetLength(1))
+        if ((RndX > 0 && RndX < gManager.levelMap.RandomMap.GetLength(0))&& (RndY > 0 && RndY < gManager.levelMap.RandomMap.GetLength(1)))
         {
             if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
             {
@@ -58,11 +62,13 @@ public class EnemyControlUnit : MonoBehaviour
         {
             FindFirstTarget();
         }
-
     }
+
+
     private void Update()
     {
-        if (target != null)
+        checkPlayerIsInRange();
+        if (target != null && target != Player)
         {
             Timer += Time.deltaTime;
             Distance = Vector3.Distance(target.transform.position, transform.position);
@@ -72,6 +78,19 @@ public class EnemyControlUnit : MonoBehaviour
                 Turn();
                 Timer = 0;
             }
+        }
+        else
+        {
+            Turn();
+        }
+    }
+
+    private void checkPlayerIsInRange()
+    {
+        if(Vector3.Distance(Player.transform.position,this.transform.position)< 10)
+        {
+            IsInFireDistance = true;
+            target = Player;
         }
     }
 
@@ -83,14 +102,14 @@ public class EnemyControlUnit : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       // MoveTo();
+       MoveTo();
     }
 
     private void NextWaypoint()
     {
         int RndX = UnityEngine.Random.Range((int)this.transform.position.x - WaypointRange, (int)this.transform.position.x + WaypointRange);
         int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
-        if (RndX > 0 || RndX < gManager.levelMap.RandomMap.GetLength(0) - 1 || RndY > 0 || RndY < gManager.levelMap.RandomMap.GetLength(1) - 1)
+        if ((RndX > 0 && RndX < gManager.levelMap.RandomMap.GetLength(0)) && (RndY > 0 && RndY < gManager.levelMap.RandomMap.GetLength(1)))
         {
             if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
             {
