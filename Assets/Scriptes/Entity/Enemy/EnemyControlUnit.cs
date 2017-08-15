@@ -22,6 +22,8 @@ public class EnemyControlUnit : MonoBehaviour
     [SerializeField]
     private GameObject target;
     [SerializeField]
+    private GameObject oldtarget;
+    [SerializeField]
     private int WaypointRange = 6;
     [SerializeField]
     private GameObject Player;
@@ -45,13 +47,14 @@ public class EnemyControlUnit : MonoBehaviour
     {
         int RndX = UnityEngine.Random.Range((int)this.transform.position.x - WaypointRange, (int)this.transform.position.x + WaypointRange);
         int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
-        if ((RndX > 0 && RndX < gManager.levelMap.RandomMap.GetLength(0))&& (RndY > 0 && RndY < gManager.levelMap.RandomMap.GetLength(1)))
+        if ((RndX > 0 && RndX < gManager.levelMap.RandomMap.GetLength(0)) && (RndY > 0 && RndY < gManager.levelMap.RandomMap.GetLength(1)))
         {
             if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
             {
                 GameObject temp = Instantiate(targetPrefab, new Vector3(RndX, RndY), Quaternion.identity) as GameObject;
 
                 target = temp;
+                oldtarget = temp;
             }
             else
             {
@@ -87,10 +90,16 @@ public class EnemyControlUnit : MonoBehaviour
 
     private void checkPlayerIsInRange()
     {
-        if(Vector3.Distance(Player.transform.position,this.transform.position)< 10)
+        if (Vector3.Distance(Player.transform.position, this.transform.position) < 10)
         {
             IsInFireDistance = true;
             target = Player;
+        }
+        else
+        {
+            IsInFireDistance = false;
+            target = oldtarget;
+            NextWaypoint();
         }
     }
 
@@ -102,7 +111,10 @@ public class EnemyControlUnit : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       MoveTo();
+        if (!IsInFireDistance)
+        {
+            MoveTo();
+        }
     }
 
     private void NextWaypoint()
