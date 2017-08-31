@@ -27,6 +27,7 @@ public class IrcClient
         outputStream.WriteLine("PASS " + password);
         outputStream.WriteLine("NICK " + userName);
         outputStream.WriteLine("USER " + userName + " 8 * :" + userName);
+        outputStream.WriteLine("CAP REQ :twitch.tv/commands");
         outputStream.Flush();
     }
 
@@ -34,6 +35,7 @@ public class IrcClient
     {
         this.channel = channel;
         outputStream.WriteLine("JOIN #" + channel);
+        outputStream.WriteLine("JOIN #jtv");
         outputStream.Flush();
     }
 

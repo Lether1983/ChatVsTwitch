@@ -90,6 +90,10 @@ public class EnemyControlUnit : MonoBehaviour
 
     private void checkPlayerIsInRange()
     {
+        if (Player == null)
+        {
+            FindThePlayer();
+        }
         if (Vector3.Distance(Player.transform.position, this.transform.position) < 10)
         {
             IsInFireDistance = true;
@@ -103,6 +107,11 @@ public class EnemyControlUnit : MonoBehaviour
         }
     }
 
+    private void FindThePlayer()
+    {
+        Player = GameObject.Find("Player(Clone)");
+    }
+
     private void Turn()
     {
         float angle = Mathf.Atan2(-transform.position.y + target.transform.position.y, -transform.position.x + target.transform.position.x) * Mathf.Rad2Deg;
@@ -111,6 +120,7 @@ public class EnemyControlUnit : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        contoller.velocity = Vector2.zero;
         if (!IsInFireDistance)
         {
             MoveTo();
@@ -123,7 +133,7 @@ public class EnemyControlUnit : MonoBehaviour
         int RndY = UnityEngine.Random.Range((int)this.transform.position.y - WaypointRange, (int)this.transform.position.y + WaypointRange);
         if ((RndX > 0 && RndX < gManager.levelMap.RandomMap.GetLength(0)) && (RndY > 0 && RndY < gManager.levelMap.RandomMap.GetLength(1)))
         {
-            if (gManager.levelMap.RandomMap[RndX, RndY] != 1)
+            if (gManager.levelMap.RandomMap[RndX, RndY] == 1)
             {
                 target.transform.position = new Vector3(RndX, RndY);
             }
