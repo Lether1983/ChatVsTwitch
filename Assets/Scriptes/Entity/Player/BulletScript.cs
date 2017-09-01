@@ -18,6 +18,10 @@ public class BulletScript : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().getDamage(Damage);
             this.gameObject.SetActive(false);
         }
+        else if (collision.gameObject.tag == "Bullet")
+        {
+            Physics2D.IgnoreLayerCollision(this.gameObject.layer, collision.gameObject.layer,true);
+        }
         else if (collision.gameObject.tag != "Player")
         {
             this.gameObject.SetActive(false);
