@@ -8,6 +8,8 @@ using UnityTesselation.Contracts.Generators;
 
 public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, ICollisionGenerator<Edge<Vector2>,CaveNode,Vector2,int>, IVertexGenerator<CaveVertex, CaveNode, Vector2, int>
 {
+    public TileManager tManager;
+
     private static readonly Vector2[] surrounds = new[]
     {
             Vector2.left,
@@ -22,12 +24,11 @@ public class CaveTesselation : MonoBehaviour, ITesselation<Vector2, int>, IColli
             Vector2.one,
             Vector2.right
         };
+
     [SerializeField]
     private GameManager gManager = null;
-    [SerializeField]
-    TileManager tManager;
 
-    public GameManager GameManager { get { return gManager; } }
+    public GameManager GameManager { get { return gManager; } set { gManager = value; } }
 
     IEnumerable<Edge<Vector2>> IGenerator<Edge<Vector2>, CaveNode, Vector2, int>.Generate(CaveNode node)
     {

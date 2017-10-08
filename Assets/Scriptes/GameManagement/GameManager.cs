@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour, IGameManager
     public bool VoteDone;
     public List<GameObject> BulletPool;
     public List<GameObject> EnemyBulletPool;
+    public GameObject Exitpoint;
+    public GameObject TessPrefab;
+    public GameObject Camera;
 
     [SerializeField]
     private GameObject SpritePrefab;
@@ -71,15 +74,23 @@ public class GameManager : MonoBehaviour, IGameManager
         JoinChat();
         levelMap = new Map();
         FillTheFirstMap();
-
         currentMap = levelMap;
         GenerateLevel();
         vManager.GameBegin();
     }
 
+    private void GenerateTesselation()
+    {
+        GameObject temp = Instantiate(TessPrefab) as GameObject;
+        tesselator = temp.GetComponent<CaveTesselator>();
+        temp.GetComponent<CaveTesselation>().GameManager = this;
+        temp.GetComponent<CaveTesselation>().tManager = GetComponent<TileManager>();
+    }
+
     private void GenerateLevel()
     {
         currentMap.CreateNewMap();
+        GenerateTesselation();
         tesselator.Tesselate();
         sManager.SpawnObjects(currentMap);
         sManager.SpawnPlayer(currentMap);
@@ -91,6 +102,7 @@ public class GameManager : MonoBehaviour, IGameManager
         levelMap.AddDecorater(new CaveGenerator());
         //levelMap.AddDecorater(new DungeonGenerator());
         levelMap.AddDecorater(new SpawnpointGenerator());
+        levelMap.AddDecorater(new TargetGenerator());
         levelMap.AddDecorater(new ExitpointGenerator());
         levelMap.AddDecorater(new BushGenerator());
         levelMap.AddDecorater(new TreeGenerator());
@@ -106,6 +118,11 @@ public class GameManager : MonoBehaviour, IGameManager
         {
             Destroy(Removal[i]);
         }
+        for (int j = 0; j < EnemyList.Count; j++)
+        {
+            Destroy(EnemyList[j].gameObject);
+        }
+        EnemyList.Clear();
         player.SavePlayerValueAndDestroy();
         player.DestroyObject();
     }
@@ -138,6 +155,12 @@ public class GameManager : MonoBehaviour, IGameManager
    
     void Update()
     {
+        if(CompletTarget)
+        {
+            sManager.SpawnExitPoint(levelMap);
+            CompletTarget = false;
+        }
+
         if (joinedTheChat)
         {
             message = irc.readMessages();

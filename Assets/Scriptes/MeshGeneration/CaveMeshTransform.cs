@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityTesselation;
 using UnityTesselation.Contracts.Generators;
-using UnityTesselation.Defaults;
 
 public class CaveMeshTransform : MonoBehaviour, IMeshTransform<CaveVertex> 
 {
@@ -40,11 +38,10 @@ public class CaveMeshTransform : MonoBehaviour, IMeshTransform<CaveVertex>
 
     public void Finish()
     {
-        var mesh = meshFilter.mesh;
+        Mesh mesh = meshFilter.mesh;
         mesh.SetVertices(vertices);
         mesh.SetTriangles(indices, 0);
         mesh.SetUVs(0, uvs);
-        mesh.UploadMeshData(true);
         vertices.Clear();
         indices.Clear();
     }

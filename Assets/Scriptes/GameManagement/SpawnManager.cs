@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject ActivePlayer;
     [SerializeField]
     private GameObject Enemyprefab;
+    private GameObject ActiveCamera;
 
     private Vector2 Startposition;
 
@@ -49,11 +50,35 @@ public class SpawnManager : MonoBehaviour
                             if (spawnObjects[i].Name == "ExitPoint") continue;
                             if (spawnObjects[i].Prefab)
                             {
-                                SpriteGetter Temp =Instantiate(spawnObjects[i].Prefab, new Vector2(x, y), Quaternion.identity);
+                                SpriteGetter Temp = Instantiate(spawnObjects[i].Prefab, new Vector2(x, y), Quaternion.identity);
                                 Temp.tManager = tManager;
                                 Temp.gameObject.transform.SetParent(temp2.transform);
                             }
                             break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void SpawnTargets(Map levelmap)
+    {
+        for (int x = 0; x < levelmap.MapWidth; x++)
+        {
+            for (int y = 0; y < levelmap.MapHeight; y++)
+            {
+                if ((levelmap.Get(x, y) & 4) > 0)
+                {
+                    var entity = levelmap.Get(x, y) >> 10;
+                    if (entity == 8)
+                    {
+                        foreach (var item in spawnObjects)
+                        {
+                            if (item.Name == "Target")
+                            {
+                                Instantiate(item.Prefab, new Vector2(x, y), Quaternion.identity).tManager = tManager;
+                            }
                         }
                     }
                 }
@@ -79,7 +104,11 @@ public class SpawnManager : MonoBehaviour
                     {
                         Startposition = new Vector2(x, y);
                         ActivePlayer = Instantiate(Player, Startposition, Quaternion.identity) as GameObject;
-                        Instantiate(Camera, new Vector3(x, y,-10), Quaternion.identity);
+                        if (ActiveCamera == null)
+                        {
+                            ActiveCamera = Instantiate(Camera, new Vector3(Startposition.x, Startposition.y, -10), Quaternion.identity) as GameObject;
+                        }
+                        GetComponent<GameManager>().player = ActivePlayer.GetComponent<Player>();
                     }
                 }
             }
@@ -91,7 +120,6 @@ public class SpawnManager : MonoBehaviour
         Instantiate(MorterObject, new Vector2(x, y), Quaternion.identity);
     }
 
-    //TODO: SpawnEnemys On the Map
     public void SpawnEnemys(Map levelmap)
     {
         for (int x = 0; x < levelmap.MapWidth; x++)
@@ -135,9 +163,11 @@ public class SpawnManager : MonoBehaviour
                     {
                         foreach (var item in spawnObjects)
                         {
-                            if(item.Name == "ExitPoint")
+                            if (item.Name == "ExitPoint")
                             {
-                                Instantiate(item.Prefab, new Vector2(x, y), Quaternion.identity).tManager = tManager;
+                                    GameObject temp = Instantiate(item.Prefab.gameObject, new Vector2(x, y), Quaternion.identity) as GameObject;
+                                    temp.GetComponent<SpriteGetter>().tManager = tManager;
+                                    GetComponent<GameManager>().Exitpoint = temp;
                             }
                         }
                     }

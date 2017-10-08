@@ -8,7 +8,8 @@ public class ExitpointScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().gmanager.ChangeToNextLevel();
+            collision.gameObject.GetComponentInParent<Player>().gmanager.DeleteTheCurrentMap();
+            collision.gameObject.GetComponentInParent<Player>().gmanager.ChangeToNextLevel();
         }
     }
 }

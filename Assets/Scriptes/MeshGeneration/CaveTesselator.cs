@@ -11,8 +11,8 @@ public class CaveTesselator : UnityTesselator2D<CaveVertex, CaveNode, int>, IMes
 {
     [SerializeField]
     private CaveColliderTransform colliderPrefab = null;
-    private Dictionary<int, IColliderTransform<Edge<Vector2>>> colliders = new Dictionary<int, IColliderTransform<Edge<Vector2>>>();
-    private Dictionary<int, IMeshTransform<CaveVertex>> meshes = new Dictionary<int, IMeshTransform<CaveVertex>>();
+    public Dictionary<int, IColliderTransform<Edge<Vector2>>> colliders = new Dictionary<int, IColliderTransform<Edge<Vector2>>>();
+    public Dictionary<int, IMeshTransform<CaveVertex>> meshes = new Dictionary<int, IMeshTransform<CaveVertex>>();
     [SerializeField]
     private CaveMeshTransform meshPrefab = null;
     [SerializeField]

@@ -32,6 +32,7 @@ public class RescueCivilian : MonoBehaviour
             {
                 Civilian.Add(CivilianToAdd);
                 gManager.CompletTarget = true;
+                CivilianToAdd.SetActive(false);
 
             }
         }
