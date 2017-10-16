@@ -178,12 +178,11 @@ public class VoteManager : MonoBehaviour
                 if (gmanager.activeVote.name == "RebelVote")
                 {
 
-                    //TODO: Test it
+                    
                     gmanager.SManager.SpawnRebelsNearPlayer();
                 }
                 else
                 {
-                    //TODO: Test it
                     var type = Type.GetType(gmanager.activeVote.Classname);
                     gmanager.levelMap.AddDecorater((IMapGenerator)Activator.CreateInstance(type));
                 }
