@@ -89,6 +89,7 @@ public class SpawnManager : MonoBehaviour
     public void RestartPlayerPosition()
     {
         ActivePlayer = Instantiate(Player, Startposition, Quaternion.identity) as GameObject;
+        GetComponent<GameManager>().player = ActivePlayer.GetComponent<Player>();
     }
 
     public void SpawnPlayer(Map levelmap)

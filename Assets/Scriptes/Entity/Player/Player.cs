@@ -103,6 +103,8 @@ public class Player : Entitys
 
     private void RestartPlayer()
     {
+        Destroy(gmanager.Exitpoint);
+        gmanager.SManager.SpawnTargets(gmanager.levelMap);
         CreateNewPlayer();
         LoadPlayerValue();
         gmanager.SManager.RestartPlayerPosition();

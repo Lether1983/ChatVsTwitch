@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour, IGameManager
             Destroy(EnemyList[j].gameObject);
         }
         EnemyList.Clear();
+        Destroy(Exitpoint);
         player.SavePlayerValueAndDestroy();
         player.DestroyObject();
     }
